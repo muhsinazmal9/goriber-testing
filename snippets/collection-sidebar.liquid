@@ -1,0 +1,139 @@
+<!-- /snippets/collection-sidebar.liquid -->
+<aside class="sidebar-left sidebar-shop">
+  <div class="widget widget-search">
+    <form class="search-form">
+      <input onblur="if (this.value=='') this.value = this.defaultValue" onfocus="if (this.value==this.defaultValue) this.value = ''" value="{{ 'general.search.placeholder' | t }}" type="text" name="q">
+      <input type="submit" value="">
+    </form>
+
+  </div>
+  <!-- End Widget -->
+   {%if settings.sidebar_enable_category_collection == true %}
+  <div class="widget widget-category">
+    <h2 class="title18 title-widget font-bold">{{settings.sidebar_category_title}}</h2>
+    <ul class="list-none wg-list-cat">
+      {% for link in linklists[settings.sidebar_category_collection].links %}
+
+      <li>
+        <a href="{{link.url}}">{{link.title}}</a>
+      </li>
+      {%endfor%}
+    </ul>
+  </div>
+  {%endif%}
+  {% if template contains 'collection' %}
+  {% if settings.filter_enable %}
+    {% include 'collection.shopby-price' %}
+    {% include 'collection.shopby-size' %}
+    {% include 'collection.shopby-color' %}
+    {% include 'collection.shopby-brand' %}
+  {% endif %}
+{% endif %}
+
+  <!-- ENd Widget -->
+
+  <!-- End Filter Price -->
+  <div class="collection-sidebar">
+    {%if settings.bestseller_enable%}
+  <div class="widget widget-new-product">
+    <h2 class="title18 title-widget font-bold">{{settings.bestseller_title}}</h2>
+    <div class="wg-product-slider">
+      <div class="wrap-item group-navi" data-pagination="false" data-navigation="true" data-itemscustom="[[0,1],[560,2],[768,1]]">
+        
+        <!-- End Item -->
+        <div class="item">
+          {%for product in collections[settings.bestseller_collection].products limit:10 %}
+          {%if forloop.index <= 5 %}
+          {% assign on_sale = false %}
+          {% if product.compare_at_price > product.price %}
+          {% assign on_sale = true %}
+          {% endif %}
+
+          {% assign sold_out = true %}
+          {% if product.available %}
+          {% assign sold_out = false %}
+          {% endif %}
+          <div class="item-wg-product table">
+            <div class="product-thumb">
+              <a href="{{product.url}}" class="product-thumb-link zoom-thumb">
+                   <img src="{{ product.featured_image.src | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" >
+              </a>
+              <a href="javascript:void(0)" class="quickview-link quick-view engoj-btn-quickview"><i class="fa fa-search" aria-hidden="true"></i></a>
+            </div>
+            <div class="product-info">
+              <h3 class="product-title"><a href="{{ product.url | within: collection }}">{{product.title}}</a></h3>
+              <div class="product-price">
+                {% capture price %}{{ product.price | money }}{% endcapture %}
+                {% if on_sale %}
+                <del class="silver"><span>{{ product.compare_at_price | money }}</span></del>
+                {% endif %}
+                {% if product.price_varies %}
+                <ins class="color"><span>{{ 'products.general.from_text_html' | t: price: price }}</span></ins>
+                {% else %}
+                <ins class="color"><span>{{ price }}</span></ins>
+
+                {% endif %}
+              </div>
+              <div class="product-rate">
+                <div class="product-rating shopify-product-reviews-badge" data-id="{{ product.id }}"></div>
+              </div>
+            </div>
+          </div>
+          {%endif%}
+          {%endfor%}
+        </div>
+        {%if collections[settings.bestseller_collection].products_count <= 10 and collections[settings.bestseller_collection].products_count > 5 %}
+        <div class="item">
+          {%for product in collections[settings.bestseller_collection].products limit:10 %}
+          {%if forloop.index <= 10 and forloop.index > 5 %}
+          {% assign on_sale = false %}
+          {% if product.compare_at_price > product.price %}
+          {% assign on_sale = true %}
+          {% endif %}
+
+          {% assign sold_out = true %}
+          {% if product.available %}
+          {% assign sold_out = false %}
+          {% endif %}
+          <div class="item-wg-product table">
+            <div class="product-thumb">
+              <a href="{{product.url}}" class="product-thumb-link zoom-thumb">
+                   <img src="{{ product.featured_image.src | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" >
+              </a>
+              <a href="javascript:void(0)" class="quickview-link quick-view engoj-btn-quickview"><i class="fa fa-search" aria-hidden="true"></i></a>
+            </div>
+            <div class="product-info">
+              <h3 class="product-title"><a href="{{ product.url | within: collection }}">{{product.title}}</a></h3>
+              <div class="product-price">
+                {% capture price %}{{ product.price | money }}{% endcapture %}
+                {% if on_sale %}
+                <del class="silver"><span>{{ product.compare_at_price | money }}</span></del>
+                {% endif %}
+                {% if product.price_varies %}
+                <ins class="color"><span>{{ 'products.general.from_text_html' | t: price: price }}</span></ins>
+                {% else %}
+                <ins class="color"><span>{{ price }}</span></ins>
+
+                {% endif %}
+              </div>
+              <div class="product-rate">
+                <div class="product-rating shopify-product-reviews-badge" data-id="{{ product.id }}"></div>
+              </div>
+            </div>
+          </div>
+          {%endif%}
+          {%endfor%}
+
+        </div>
+        {%endif%}
+        <!-- End Item -->
+      </div>
+    </div>
+  </div>
+  {%endif%}
+  </div>
+  <!-- End WIdget -->
+
+</aside>
+
+

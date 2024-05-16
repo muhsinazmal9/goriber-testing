@@ -1,0 +1,149 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="section-product-carousel-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="product-carousel-v2">
+    
+    <div class="featured-product6" style="background-image: {%if section.settings.section_background == blank %}url({{'parallax.jpg'|asset_url}}){%else%}url({{section.settings.section_background|img_url:"master"}}){%endif%};
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;">
+			<div class="container">
+				<h2 class="title30 font-bold title-box1 text-center white">{{section.settings.collection_title}}</h2>
+				<div class="featured-product-slider">
+					<div class="wrap-item" data-navigation="true" data-pagination="false" data-autoplay="true" data-itemscustom="[[0,1],[560,2],[990,3]]">
+                      
+                       {%for block in section.blocks %}
+                      {%if block.settings.product != blank %}
+						<div class="item-product item-product-featured6 text-center">
+							<div class="product-thumb">
+								<a href="{{all_products[block.settings.product].url}}" class="wobble-horizontal">
+                                  {%if block.settings.product_image == blank%}
+									<img src="{{'fea1.png'|asset_url}}" alt="">
+                                  {%else%}
+                                  <img src="{{block.settings.product_image|img_url:"large"}}" alt="">
+                                  {%endif%}
+								</a>
+							</div>
+							<div class="product-info">
+								<h3 class="title18"><a class="white" href="{{all_products[block.settings.product].url}}">{{all_products[block.settings.product].title}}</a></h3>
+								<div class="product-price">
+									<ins class="white"><span>{{all_products[block.settings.product].price|money}}</span></ins>
+								</div>
+								<a href="{{all_products[block.settings.product].url}}" class="shop-button text-uppercase">{{block.settings.product_shop_now}} <i class="icon ion-ios-arrow-thin-right"></i></a>
+							</div>
+						</div>
+                      {%else%}
+                      <div class="item-product item-product-featured6 text-center">
+							<div class="product-thumb">
+								<a href="/admin/products/new" class="wobble-horizontal">
+                                  {%if block.settings.product_image == blank%}
+									<img src="{{'fea1.png'|asset_url}}" alt="">
+                                  {%else%}
+                                  <img src="{{block.settings.product_image|img_url:"large"}}" alt="">
+                                  {%endif%}
+								</a>
+							</div>
+							<div class="product-info">
+								<h3 class="title18"><a class="white" href="/admin/products/new">Fresh Meal Kit</a></h3>
+								<div class="product-price">
+									<ins class="white"><span>€30.000</span></ins>
+								</div>
+								<a href="/admin/products/new" class="shop-button text-uppercase">Shop now  <i class="icon ion-ios-arrow-thin-right"></i></a>
+							</div>
+						</div>
+                      {%endif%}
+						 {%endfor%}
+					</div>
+				</div>
+			</div>
+		</div>	
+    
+ 
+  </section>
+</div>
+
+{% schema %}
+
+  {
+    "name": "Product Carousel v2",
+    "class" : "index-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "collection_title",
+        "label": "Title",
+        "default": "Featured Products"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_background",
+        "label": "Background"
+      }
+
+    ],
+    "blocks": [
+      {
+      "type": "product",
+      "name": "product",
+      "settings": [
+    	{
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Featured image"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select product"
+        },
+        {
+          "type": "text",
+          "id": "product_shop_now",
+          "label": "Shop now",
+          "default":"Shop now"
+        }
+       
+      ]
+      }
+
+    ],
+    "presets": [
+      {
+        "name": "Product Carousel v2",
+        "category": "Collection",
+        "blocks": [
+                {
+                "type": "product"
+                },
+                {
+                "type": "product"
+                },
+                {
+                "type": "product"
+                },
+                {
+                "type": "product"
+                },
+                {
+                "type": "product"
+                }
+            ]
+      }
+    ]
+  }
+{% endschema %}

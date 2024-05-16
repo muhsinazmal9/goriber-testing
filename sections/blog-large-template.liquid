@@ -1,0 +1,52 @@
+{% paginate blog.articles by {{section.settings.article_per_page}} %}
+{%include 'breadcrumb' %}
+<div class="blog-post-container blog-page blog-post-columns-3 center">
+  <div class="container container-ver2">
+    <div class="row">
+      {% for article in blog.articles %}
+      <div class="blog-post-item">
+        <div class="blog-post-image hover-images">
+
+          <a href="{{ article.url}}" ><img src="{{ article.image.src | img_url: 'grande' }}" alt=""></a>
+        </div>  
+        <div class="text">                          
+          <h3><a href="{{article.url}}">{{article.title}}</a></h3>
+          <p class="post-by"><span><i class="fa fa-pencil-square-o"></i> {{article.author}}</span><span><i class="fa fa-comment-o"></i> {{article.comments_count}} {{'blogs.comments.comments_with_count.other'|t}}</span></p>
+          <p class="content"> 
+            {% if article.excerpt == blank %}
+
+            {{ article.content | strip_html | truncate: 150 }}
+            {% else %}
+
+            {{ article.excerpt }}
+            {% endif %}
+          </p>
+          <a class="link-v1 color-brand" href="{{ article.url}}" title="readmore">{{'blogs.article.read_more'|t}}</a>
+        </div>
+        <!-- End text -->
+      </div>
+      <!-- End item -->
+      {% endfor %}
+    </div>
+  </div>
+  {% if paginate.pages > 1 %}
+  {% include 'pagination' %}
+  {% endif %}
+  <!-- End pagination-container -->
+</div>
+
+{% endpaginate %}
+{% schema %}
+{
+  "name": "Blog 3 column pages",
+  "settings": [
+    
+    {
+      "type": "text",
+      "id": "article_per_page",
+      "label": "article per page",
+		"default":"3"
+    }
+  ]
+}
+{% endschema %}

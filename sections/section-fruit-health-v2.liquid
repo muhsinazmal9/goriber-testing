@@ -1,0 +1,192 @@
+
+
+<div data-section-id="{{ section.id }}" data-section-type="section-fruit-health" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section>
+    
+    <div class="container">
+    <div class="fruit-health7">
+				<h2 class="title30 font-bold text-center">{{section.settings.section_title}}</h2>
+				<div class="row">
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="list-diet7 left">
+                           {%for block in section.blocks%}
+                          {%if block.type == 'left'%}
+							<div class="item-diet table">
+								<div class="diet-info text-right">
+									<h3 class="title18"><a href="{{block.settings.fruit_image_url}}" class="black">{{block.settings.fruit_title}}</a></h3>
+									<p class="desc">{{block.settings.fruit_text}}</p>
+								</div>
+								<div class="diet-thumb"><a href="{{block.settings.fruit_image_url}}"><img {%if block.settings.fruit_image == blank %} src="{{'diet1.png'|asset_url}}"{%else%}src="{{block.settings.fruit_image|img_url:'small'}}"{%endif%} alt="" /></a></div>
+							</div>
+                         
+                          {%endif%}
+                          {%endfor%}
+						
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="sevenup-theme">
+                          
+                          <a href="{{section.settings.health_image_url}}">
+                       <img {%if section.settings.health_image == blank %}src="{{'seven.png'|asset_url}}"{%else%}src="{{section.settings.health_image|img_url:'large'}}"{%endif%} alt="" />
+                      </a>
+                      </div>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="list-diet7 right">
+                          {%for block in section.blocks%}
+                          {%if block.type == 'right'%}
+							<div class="item-diet table">
+                              <div class="diet-thumb"><a href="{{block.settings.fruit_image_url}}"><img {%if block.settings.fruit_image == blank %}src="{{'diet1.png'|asset_url}}"{%else%}src="{{block.settings.fruit_image|img_url:'small'}}"{%endif%} alt="" /></a></div>
+						
+								<div class="diet-info">
+									<h3 class="title18"><a href="{{block.settings.fruit_image_url}}" class="black">{{block.settings.fruit_title}}</a></h3>
+									<p class="desc">{{block.settings.fruit_text}}</p>
+								</div>
+									</div>
+                         
+							
+                          {%endif%}
+                          {%endfor%}
+							
+						</div>
+					</div>
+				</div>
+			</div>
+    </div>
+
+   
+			
+	
+  </section>
+</div>
+
+{% schema %}
+
+  {
+    "name": "Fruit health v2",
+    "class" : "index-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "section_title",
+        "label": "Title",
+        "default": "Fruit And Health"
+      },
+      {
+        "type": "image_picker",
+        "id": "health_image",
+        "label": "Image"
+      },
+       {
+        "type": "url",
+        "id": "health_image_url",
+        "label": "Url"
+      }
+	  
+      
+    ],
+"blocks": [
+      {
+      "type": "left",
+      "name": "left",
+      "settings": [
+    	{
+          "type": "image_picker",
+          "id": "fruit_image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "fruit_image_url",
+          "label": "Url"
+        },
+        {
+          "type": "text",
+          "id": "fruit_title",
+          "label": "Title",
+          "default":"Purple Grapes"
+        },
+        {
+          "type": "text",
+          "id": "fruit_text",
+          "label": "Content",
+          "default":"Best Superfoods for Weight Loss"
+        }
+      ]
+      },
+      {
+      "type": "right",
+      "name": "right",
+      "settings": [
+    	{
+          "type": "image_picker",
+          "id": "fruit_image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "fruit_image_url",
+          "label": "Url"
+        },
+        {
+          "type": "text",
+          "id": "fruit_title",
+          "label": "Title",
+          "default":"Purple Grapes"
+        },
+        {
+          "type": "text",
+          "id": "fruit_text",
+          "label": "Content",
+          "default":"Best Superfoods for Weight Loss"
+        }
+      ]
+      }
+
+    ],
+   
+    "presets": [
+      {
+        "name": "Fruit health v2",
+        "category": "Fruit health",
+        "blocks": [
+                {
+                "type": "left"
+                },
+                {
+                "type": "left"
+                },
+                {
+                "type": "left"
+                },
+                {
+                "type": "right"
+                },
+                {
+                "type": "right"
+                },
+                {
+                "type": "right"
+                }
+            ]
+      }
+    ]
+  }
+{% endschema %}

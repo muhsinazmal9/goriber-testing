@@ -1,0 +1,115 @@
+
+
+
+
+
+
+<!-- section-slider-v1.liquid -->
+
+<div data-section-id="{{ section.id }}" data-section-type="section-policy-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<section >
+  <div class="container">
+    <div class="shop-policy11">
+				<div class="row">
+                  {%for block in section.blocks %}
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="item-policy11 text-center">
+							<h2 class="title18 font-bold">{{block.settings.policy_text_1}}</h2>
+							<a href="{{block.settings.icon_policy_url}}">
+                              {%if block.settings.icon_policy == blank%}
+                              <img src="{{'ad11.jpg'|asset_url}}" alt="" />
+                              {%else%}
+                              <img src="{{block.settings.icon_policy|img_url:"master"}}" alt="" />
+                              {%endif%}
+                          
+                          </a>
+							<p class="desc">{{block.settings.policy_text_2}}</p>
+						</div>
+					</div>
+                  {%endfor%}
+					
+				</div>
+			</div>
+  
+  </div>
+  
+</section>
+</div>
+
+
+{% schema %}
+{
+  "name": "Section policy v4",
+  "class": "index-section",
+  "settings": [
+	 
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      }
+      
+  ],
+  "blocks": [
+    {
+      "type": "policy",
+      "name": "Policy",
+       "limit":3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_policy",
+          "label": "Icon"
+        },
+        {
+          "type": "url",
+          "id": "icon_policy_url",
+          "label": "Url"
+        },
+		
+		{
+          "type": "text",
+          "id": "policy_text_1",
+          "label": "Text 1",
+		  "default":"FREE SHIPPING"
+        },
+		{
+          "type": "text",
+          "id": "policy_text_2",
+          "label": "Text 2",
+		  "default":"With €50 or more orders"
+        }
+		
+      ]
+    }
+	
+  ],
+  "presets": [{
+    "name": "policy v4",
+    "category": "Policy",
+    "blocks": [
+      {
+        "type": "policy"
+      },
+	  {
+        "type": "policy"
+      },
+	  {
+        "type": "policy"
+      }
+    ]
+  }]
+}
+{% endschema %}
+

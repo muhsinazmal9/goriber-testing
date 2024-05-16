@@ -1,0 +1,151 @@
+<!-- section-slider-v1.liquid -->
+
+<div data-section-id="{{ section.id }}" data-section-type="section-slider-v8" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<section>
+  
+  <div class="banner-slider bg-slider banner-slider8 parallax-slider">
+			<div class="wrap-item" data-navigation="true" data-transition="fade" data-pagination="false" data-autoplay="true" data-itemscustom="[[0,1]]">
+				{%for block in section.blocks %}
+              <div class="item-slider item-slider3">
+					<div class="banner-thumb"><a href="#">
+                        <img {%if block.settings.image_slider == blank %} src="{{'slide12.jpg'| asset_url }}" {%else%} src="{{block.settings.image_slider|img_url:'master'}}"{%endif%} alt="" />
+         
+                      
+                      </a></div>
+					<div class="banner-info text-center white animated" data-animated="zoomIn">
+						<h2 class="title30 color paci-font" style="color:{{block.settings.slider_text_1_color}}">{{block.settings.slider_text_1}}</h2>
+							<h2 class="color2 font-bold text-uppercase title30" style="color:{{block.settings.slider_text_2_color}}">{{block.settings.slider_text_2}} </h2>
+							<div class="banner-button">
+                              {%if block.settings.slider_text_button%}
+								<a href="{{block.settings.slider_text_button_url}}" class="btn-arrow color style2"  style="color:{{block.settings.slider_text_button_color}}" >{{block.settings.slider_text_button}}</a>
+                              {%endif%}
+                              {%if block.settings.slider_text_button2%}
+								<a href="{{block.settings.slider_text_button2_url}}" class="btn-arrow bg-color style2"  style="color:{{block.settings.slider_text_button2_color}}">{{block.settings.slider_text_button2}}</a>
+                              {%endif%}
+							</div>
+					</div>
+				</div>
+              
+              
+              {%endfor%}
+				
+			</div>
+		</div>
+
+  </section>
+</div>
+
+
+{% schema %}
+{
+  "name": "Section Slideshow v8",
+  "class": "index-section",
+  "settings": [
+	 
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      }
+  ],
+  "blocks": [
+    {
+      "type": "slider",
+      "name": "Slider",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_slider",
+          "label": "Background "
+        },
+
+		{
+          "type": "text",
+          "id": "slider_text_1",
+          "label": "Text 1",
+		  "default":"Food & Nutrition"
+        },
+		{
+          "type": "color",
+          "id": "slider_text_1_color",
+          "label": "Text color"
+        },
+
+		{
+          "type": "text",
+          "id": "slider_text_2",
+          "label": "Text 2",
+		  "default":"10 Health Benefits of Spirulina"
+        },
+		{
+          "type": "color",
+          "id": "slider_text_2_color",
+          "label": "Text color"
+        },
+		{
+          "type": "text",
+          "id": "slider_text_button",
+          "label": "Text button 1",
+		  "default":"Shop now!"
+        },
+        {
+          "type": "color",
+          "id": "slider_text_button_color",
+          "label": "Text button color"
+        },
+		{
+          "type": "url",
+          "id": "slider_text_button_url",
+          "label": "Url"
+        },
+		{
+          "type": "text",
+          "id": "slider_text_button2",
+          "label": "Text button",
+		  "default":"more detail!"
+        },
+        {
+          "type": "color",
+          "id": "slider_text_button2_color",
+          "label": "Text button 2 color"
+        },
+		{
+          "type": "url",
+          "id": "slider_text_button2_url",
+          "label": "Url"
+        }
+		
+
+      ]
+    }
+	
+  ],
+  "presets": [{
+    "name": "Slider v8",
+    "category": "Slidershow",
+    "blocks": [
+      {
+        "type": "slider"
+      },
+	  {
+        "type": "slider"
+      },
+	  {
+        "type": "slider"
+      }
+
+    ]
+  }]
+}
+{% endschema %}

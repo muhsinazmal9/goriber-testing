@@ -1,0 +1,298 @@
+<!-- section-slider-v1.liquid -->
+
+<div data-section-id="{{ section.id }}" data-section-type="section-slider-v5" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<section class="slider-show">
+
+   
+  <div class="content-top5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-12 col-xs-12">
+						<div class="banner-slider banner-slider5">
+							<div class="wrap-item" data-transition="fade" data-pagination="false"  data-autoplay="true" data-navigation="true" data-itemscustom="[[0,1]]">
+                              
+                              {%for block in section.blocks %}
+                              {%if block.type == 'slider' %}
+								<div class="item-slider item-slider5">
+                                  <div class="banner-thumb">
+                                    <a href="{{block.settings.slider_text_button_url}}">
+                                      {%if block.settings.image_slider == blank%}
+                                      <img  src="{{'slide13.jpg'| asset_url }}" alt="">
+                                      {%else%}
+                                      <img src="{{block.settings.image_slider|img_url:'master'}}" alt="" />
+                                      {%endif%}
+                                    </a>
+
+                                  </div>
+									<div class="banner-info text-center">
+										<h3 class="title30 paci-font" style="color:{{block.settings.slider_text_1_color}}">{{block.settings.slider_text_1}}</h3>
+										<h2 class="title60 color text-uppercase font-bold" style="color:{{block.settings.slider_text_2_color}}">{{block.settings.slider_text_2}}</h2>
+										<h4 class="title18 text-uppercase" style="color:{{block.settings.slider_text_3_color}}">{{block.settings.slider_text_3}}</h4>
+										<a href="{{block.settings.slider_text_button_url}}" class="btn-arrow btn-arrow1{{block.id}} color" style=" color:{{block.settings.slider_text_button_color}}; 
+                                background:{{block.settings.slider_button_background}};">{{block.settings.slider_text_button}}</a>
+									</div>
+								</div>
+                              
+                              {%endif%}
+                              {%endfor%}
+							
+							</div>
+						</div>
+					</div>
+                  {%for block in section.blocks%}
+                  {%assign n = 0 %}
+                  {%if block.type == 'banner' %}
+                  {%assign n = n | plus:1 %}
+                 {%if n == 1 or n == 2 %}
+                  <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="list-adv-left5">
+                      {%if n == 1 %}
+                      <div class="banner-adv item-adv5 overlay-image zoom-rotate">
+                        <a href="{{block.settings.banner_url}}" class="adv-thumb-link">
+ 
+                           <img  src=" {%if block.settings.product_image == blank%}{{'ad1.jpg'| asset_url }} {%else%}{{block.settings.product_image|img_url:'large'}}{%endif%}" alt="" />
+ 
+                        </a>
+                        <div class="banner-info white text-center">
+                          <h3 class="title18"><a href="{{block.settings.product_url}}" class="white">{{block.settings.banner_text_1}} </a></h3>
+                          <div class="product-price">
+                            <ins class="white"><span>{{block.settings.banner_text_2}}</span></ins>
+                          </div>
+                          <a href="{{block.settings.banner_url}}" class="btn-arrow white">{{block.settings.banner_text_button}}</a>
+                        </div>
+                      </div>
+                      {%endif%}
+                      {%if n == 2 %}
+                      <div class="banner-adv item-adv5 overlay-image zoom-rotate">
+                        <a href="{{block.settings.banner_url}}" class="adv-thumb-link">
+ 
+                           <img  src=" {%if block.settings.product_image == blank%}{{'ad1.jpg'| asset_url }} {%else%}{{block.settings.product_image|img_url:'large'}}{%endif%}" alt="" />
+ 
+                        </a>
+                        <div class="banner-info white text-center">
+                          <h3 class="title18"><a href="{{block.settings.product_url}}" class="white">{{block.settings.banner_text_1}} </a></h3>
+                          <div class="product-price">
+                            <ins class="white"><span>{{block.settings.banner_text_2}}</span></ins>
+                          </div>
+                          <a href="{{block.settings.banner_url}}" class="btn-arrow white">{{block.settings.banner_text_button}}</a>
+                        </div>
+                      </div>
+                      {%endif%}
+                    </div>
+                  </div>
+                  {% endif %}
+                  {%if n == 3 or n == 4 %}
+                  <div class="col-md-3 col-sm-6 col-xs-6">
+						<div class="list-adv-right5">
+							{%if n == 3 %}
+                      <div class="banner-adv item-adv5 overlay-image zoom-rotate">
+                        <a href="{{block.settings.banner_url}}" class="adv-thumb-link">
+ 
+                           <img  src=" {%if block.settings.product_image == blank%}{{'ad1.jpg'| asset_url }} {%else%}{{block.settings.product_image|img_url:'large'}}{%endif%}" alt="" />
+ 
+                        </a>
+                        <div class="banner-info white text-center">
+                          <h3 class="title18"><a href="{{block.settings.product_url}}" class="white">{{block.settings.banner_text_1}} </a></h3>
+                          <div class="product-price">
+                            <ins class="white"><span>{{block.settings.banner_text_2}}</span></ins>
+                          </div>
+                          <a href="{{block.settings.banner_url}}" class="btn-arrow white">{{block.settings.banner_text_button}}</a>
+                        </div>
+                      </div>
+                      {%endif%}
+                      {%if n == 4 %}
+                      <div class="banner-adv item-adv5 overlay-image zoom-rotate">
+                        <a href="{{block.settings.banner_url}}" class="adv-thumb-link">
+ 
+                           <img  src=" {%if block.settings.product_image == blank%}{{'ad1.jpg'| asset_url }} {%else%}{{block.settings.product_image|img_url:'large'}}{%endif%}" alt="" />
+ 
+                        </a>
+                        <div class="banner-info white text-center">
+                          <h3 class="title18"><a href="{{block.settings.product_url}}" class="white">{{block.settings.banner_text_1}} </a></h3>
+                          <div class="product-price">
+                            <ins class="white"><span>{{block.settings.banner_text_2}}</span></ins>
+                          </div>
+                          <a href="{{block.settings.banner_url}}" class="btn-arrow white">{{block.settings.banner_text_button}}</a>
+                        </div>
+                      </div>
+                      {%endif%}
+						</div>
+					</div>
+                  {% endif %}
+                  {%endif%}
+                  {%endfor%} 
+					
+				</div>
+			</div>
+		</div>
+</section>
+</div>
+
+
+{% schema %}
+{
+  "name": "Section Slideshow v5",
+  "class": "index-section",
+  "settings": [
+	 {
+        "type": "text",
+        "id": "category_title",
+        "label": "Title category",
+        "default": "category"
+      },
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      }
+  ],
+  "blocks": [
+    {
+      "type": "slider",
+      "name": "Slider",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_slider",
+          "label": "Image"
+        },
+		
+		{
+          "type": "text",
+          "id": "slider_text_1",
+          "label": "Text 1",
+		  "default":"Save on all products"
+        },
+		{
+          "type": "color",
+          "id": "slider_text_1_color",
+          "label": "Text color"
+        },
+	    
+		{
+          "type": "text",
+          "id": "slider_text_2",
+          "label": "Text 2",
+		  "default":"45% Off"
+        },
+		{
+          "type": "color",
+          "id": "slider_text_2_color",
+          "label": "Text color"
+        },
+        {
+          "type": "text",
+          "id": "slider_text_3",
+          "label": "Text 3",
+		  "default":"when you purchase 2 or more items*"
+        },
+		{
+          "type": "color",
+          "id": "slider_text_3_color",
+          "label": "Text color"
+        },
+		{
+          "type": "text",
+          "id": "slider_text_button",
+          "label": "Text button",
+		  "default":"Shop now!"
+        },
+		{
+          "type": "url",
+          "id": "slider_text_button_url",
+          "label": "Url"
+        },
+		{
+          "type": "color",
+          "id": "slider_text_button_color",
+          "label": "Text color"
+        },
+		{
+          "type": "color",
+          "id": "slider_button_background",
+          "label": "background button"
+        }
+
+      ]
+    },
+	
+   
+	{
+      "type": "banner",
+      "name": "Banner",
+      "limit": 4 ,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "banner_text_1",
+          "label": "Text 1",
+          "default":"Orange Fruit"
+        },
+        {
+          "type": "text",
+          "id": "banner_text_2",
+          "label": "Text 2",
+          "default":"€180.00"
+        },
+        {
+          "type": "text",
+          "id": "banner_text_button",
+          "label": "Button",
+          "default":"Shop now"
+        },
+		{
+          "type": "url",
+          "id": "banner_url",
+          "label": "Url"
+        }
+      ]
+    }
+    
+  ],
+  "presets": [{
+    "name": "Slider v5",
+    "category": "Slidershow",
+    "blocks": [
+      {
+        "type": "slider"
+      },
+	  {
+        "type": "slider"
+      },
+	  {
+        "type": "slider"
+      },
+	  
+	  {
+        "type": "banner"
+      },
+	  {
+        "type": "banner"
+      },
+	  {
+        "type": "banner"
+      },
+	  {
+        "type": "banner"
+      }
+
+    ]
+  }]
+}
+{% endschema %}

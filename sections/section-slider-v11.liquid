@@ -1,0 +1,134 @@
+<!-- section-slider-v1.liquid -->
+
+<div data-section-id="{{ section.id }}" data-section-type="section-slider-v11" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section>
+
+    <div class="container">
+      <div class="banner-slider banner-slider11">
+        <div class="wrap-item" data-navigation="true" data-pagination="false" data-itemscustom="[[0,1]]" data-transition="fade">
+          {%for block in section.blocks %}
+          <div class="item-slider item-slider11">
+            <div class="banner-thumb"><a href="{{block.settings.slider_text_button_url}}"><img {%if block.settings.image_slider == blank%} src="{{'slide3.jpg'| asset_url }}" {%else%}src="{{block.settings.image_slider|img_url:'master'}}"{%endif%} alt="" /></a></div>
+            <div class="banner-info white text-uppercase animated" data-animated="zoomInRight">
+              <h3 class="title30" style="color:{{block.settings.slider_text_1_color}}">{{block.settings.slider_text_1}}</h3>
+              <h2 class="title60 font-bold color" style="color:{{block.settings.slider_text_2_color}}">{{block.settings.slider_text_2}}</h2>
+              <h4 class="title18" style="color:{{block.settings.slider_text_3_color}}">{{block.settings.slider_text_3}}</h4>
+              <a href="{{block.settings.slider_text_button_url}}" class="btn-arrow bg-color2" style="color:{{block.settings.slider_text_button_color}}">{{block.settings.slider_text_button}} </a>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+
+{% schema %}
+{
+  "name": "Section Slideshow v10",
+  "class": "index-section",
+  "settings": [
+	 
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      }
+  ],
+  "blocks": [
+    {
+      "type": "slider",
+      "name": "Slider",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_slider",
+          "label": "Background "
+        },
+		{
+          "type": "text",
+          "id": "slider_text_1",
+          "label": "Text 1",
+		  "default":"save on all products"
+        },
+		{
+          "type": "color",
+          "id": "slider_text_1_color",
+          "label": "Text color"
+        },
+
+		{
+          "type": "text",
+          "id": "slider_text_2",
+          "label": "Text 2",
+		  "default":"45<span class=\"title90\">% Off<\/span>"
+        },
+		{
+          "type": "color",
+          "id": "slider_text_2_color",
+          "label": "Text color"
+        },
+		{
+          "type": "text",
+          "id": "slider_text_3",
+          "label": "Text 3",
+		  "default":"when you purchase 2 or more items*"
+        },
+		{
+          "type": "color",
+          "id": "slider_text_3_color",
+          "label": "Text color"
+        },
+	
+		{
+          "type": "text",
+          "id": "slider_text_button",
+          "label": "Text button",
+		  "default":"Shop now!"
+        },
+		{
+          "type": "url",
+          "id": "slider_text_button_url",
+          "label": "Url"
+        },
+		{
+          "type": "color",
+          "id": "slider_text_button_color",
+          "label": "Text color"
+        }
+
+      ]
+    }
+	
+  ],
+  "presets": [{
+    "name": "Slider v10",
+    "category": "Slidershow",
+    "blocks": [
+      {
+        "type": "slider"
+      },
+	  {
+        "type": "slider"
+      },
+	  {
+        "type": "slider"
+      }
+
+    ]
+  }]
+}
+{% endschema %}

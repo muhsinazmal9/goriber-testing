@@ -1,0 +1,101 @@
+
+
+
+<footer id="footer">
+		<div class="footer">
+			<div class="main-footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4 col-sm-8 col-xs-12">
+							<div class="footer-box">
+								<h2 class="title24 white">{{settings.f1_about_title}}</h2>
+								<div class="about-footer">
+									<a href="#">{%if settings.f1_about_image != blank %}<img src="{{settings.f1_about_image|img_url:'large'}}" alt="" />{%else%}{%endif%}</a>
+									<p class="desc silver">{{settings.f1_about_subtitle}}</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-12">
+							<div class="footer-box">
+								<h2 class="title24 white">{{settings.f1_info_title}}</h2>
+                              <ul class="list-none menu-footer">
+                                {%for link in linklists[settings.f1_info_menu].links %}
+                                <li><a class="silver" href="{{link.url}}" title="title">{{link.title}}</a></li>
+                                {%endfor%}
+                              </ul>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<div class="footer-box">
+								<h2 class="title24 white">{{settings.f1_title_instagram}}</h2>
+                              {% include 'widget_instagram'%}
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<div class="footer-box">
+								<h2 class="title24 white">{{settings.f1_contact_title}}</h2>
+								<div class="contact-footer">
+                                  {%if settings.f1_contact_address%}
+									<p class="desc silver"><span class="color"><i class="fa fa-home" aria-hidden="true"></i></span>{{settings.f1_contact_address}}</p>
+						         {%endif%}
+                                  {%if settings.f1_contact_phone%}
+                                  <p class="desc silver"><span class="color"><i class="fa fa-mobile" aria-hidden="true"></i></span>{{settings.f1_contact_phone}}</p>
+									{%endif%}
+                                  {%if settings.f1_contact_email%}
+                                  <p class="desc silver"><span class="color"><i class="fa fa-envelope" aria-hidden="true"></i></span><a href="mailto:{{settings.f1_contact_email}}" class="silver">{{settings.f1_contact_address}}</a></p>
+									{%endif%}
+                            
+                                  <p class="desc silver none-padding">{{settings.f1_contact_text}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="social-payment">
+                        <div class="row">
+                      {%if settings.f1_social_enable%}
+                    
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <ul class="list-inline-block text-left">
+                          <li><h2 class="title24 white">{{settings.f1_social_title}}</h2></li>
+                          <li>
+                            {%include "social_footer"%}
+                          </li>
+                        </ul>
+                          
+                      </div>
+                      {%endif%}
+                     
+                      {%if settings. f1_payment_enable%}
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<ul class="list-inline-block text-right">
+									<li><h2 class="title24 white">{{settings.f1_payment_title}}</h2></li>
+									<li>
+										{%include "payment-footer"%}
+									</li>
+								</ul>
+							</div>
+                      {%endif%}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Main Footer -->
+			<div class="bottom-fotter">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<p class="copyright silver text-left">{{settings.f1_copyright}}</p>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<ul class="text-right list-inline-block term-policy">
+								{%for link in linklists[settings.f1_footer_menu].links %}
+                                <li><a class="color" href="{{link.url}}" title="{{link.title}}">{{link.title}}</a></li>
+                              {%endfor%}
+							</ul>
+						</div>
+					</div>
+                   
+				</div>
+			</div>
+         </div>
+	</footer>

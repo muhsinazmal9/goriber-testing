@@ -1,0 +1,137 @@
+
+
+<!-- section-slider-v1.liquid -->
+
+<div data-section-id="{{ section.id }}" data-section-type="section-gallery-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<section >
+
+  <div class="fruit-gal3 box-parallax" style="background-image:  {%if block.settings.gallery_image == blank %}url({{'prl1a.jpg'|asset_url}}); {%else%}url({{block.settings.gallery_image|img_url:'master'}});{%endif%}">
+			<div class="container">
+				<div class="intro-gal3 white text-center">
+					<h2 class="title30 paci-font wow fadeInLeft">{{section.settings.section_title}}</h2>
+					<h2 class="title30 font-bold wow fadeInRight">{{section.settings.section_subtitle}}</h2>
+				</div>
+				<div class="list-photo-gal3" >
+					<div class="row">
+                      {%assign t = 0.2 %}
+                      {%for block in section.blocks%}
+						<div class="col-md-4 col-sm-6 col-xs-6">
+							<div class="item-gal3 box-hover-dir wow zoomInLeft" data-wow-delay="{{t}}s">
+                              {%if block.settings.gallery_image == blank %}
+								<img src="{{"gal1.jpg"|asset_url}}" alt="" />
+                              {%else%}
+                              <img src="{{block.settings.gallery_image|img_url:"large"}}" alt="" />
+                              {%endif%}
+								<div class="gal-info3">
+									<div class="gal-content3">
+										<a href="{%if block.settings.gallery_image == blank %}{{"gal1.jpg"|asset_url}}{%else%}{{block.settings.gallery_image|img_url:"large"}}{%endif%}" class="fancybox btn-gal" data-fancybox-group="gallery"><i class="fa fa-search" aria-hidden="true"></i></a>
+										<h2 class="title18 font-bold"><a href="{{block.settings.gallery_url}}" class="color">{{block.settings.gallery_text}}</a></h2>
+									</div>
+								</div>
+							</div>
+						</div>
+                      {%assign t = t |plus :0.2 %}
+                      {%endfor%}
+						
+					</div>
+				</div>
+			</div>
+		</div>
+ 
+  
+</section>
+</div>
+
+
+{% schema %}
+{
+  "name": "Section gallery v1",
+  "class": "index-section",
+  "settings": [
+	 
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+          "type": "image_picker",
+          "id": "gallery_background",
+          "label": "Background"
+      },
+      {
+          "type": "text",
+          "id": "section_title",
+          "label": "Title",
+          "default":"Fruit Gallery "
+      },
+      {
+          "type": "text",
+          "id": "section_subtitle",
+          "label": "Sub title",
+          "default":"The Photos To Ponder"
+      }
+  ],
+  "blocks": [
+    {
+      "type": "gallery",
+      "name": "gallery",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "gallery_image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "gallery_url",
+          "label": "Url"
+        },
+		{
+          "type": "text",
+          "id": "gallery_text",
+          "label": "Text",
+		  "default":"Pomegranate (35)"
+        }
+      ]
+    }
+	
+  ],
+  "presets": [{
+    "name": "Gallery v1",
+    "category": "Gallery",
+    "blocks": [
+      {
+        "type": "gallery"
+      },
+	  {
+        "type": "gallery"
+      },
+	  {
+        "type": "gallery"
+      },
+      {
+        "type": "gallery"
+      },
+	  {
+        "type": "gallery"
+      },
+	  {
+        "type": "gallery"
+      }
+    ]
+  }]
+}
+{% endschema %}
+

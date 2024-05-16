@@ -1,0 +1,14 @@
+{%for i in (1..6)%}
+{%capture _enable%}social{{i}}_enable{%endcapture%}
+{%capture _text%}social{{i}}_text{%endcapture%}
+{%capture _icon%}social{{i}}_icon{%endcapture%}
+{%capture _url%}social{{i}}_url{%endcapture%}
+
+{%assign enable = settings[_enable]%}
+{%assign icon = settings[_icon]%}
+{%assign url = settings[_url]%}
+{%if enable%}
+
+<a href="{{url}}" target="_blank"><i class="{{icon}}" aria-hidden="true"></i></a>
+{%endif%}
+{%endfor%}

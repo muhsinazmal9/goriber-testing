@@ -1,0 +1,68 @@
+
+<header id="header">
+		<div class="header header-v4">
+			<div class="top-header top-header5">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4 col-sm-4 hidden-xs">
+							{%include 'currency-picker'%}
+						</div>
+						<div class="col-md-8 col-sm-8 col-xs-12">
+							<ul class="info-account list-inline-block pull-right">
+                              {% if customer %}
+                              <li><a href="/account"><span class="color"><i class="fa fa-user-o"></i></span>{{ customer.name }}</a></li>
+                              <li><a href="/account/logout"><span class="color"><i class="fa fa-key"></i></span>{{ 'layout.customer.log_out' | t}}</a></li>
+                              <li><a href="/pages/wish-list"><span class="color"><i class="fa fa-heat"></i></span>{{ 'layout.customer.wishlist' | t}}</a></li>
+
+                              {% else %}
+                              <li><a href="/account/login"><span class="color"><i class="fa fa-user-o"></i></span>{{ 'layout.customer.log_in' | t }}</a></li>
+                              <li><a href="/account/register"><span class="color"><i class="fa fa-key"></i></span>{{ 'layout.customer.create_account' | t}}</a></li>
+                              {%endif%}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Top Header -->
+			<div class="main-header2">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="logo logo2 pull-left">
+								<h1 class="hidden">{{shop.name}}</h1>
+								<a href="{{shop.url}}"><img src="{{'h4_logo1.png'|asset_url}}" alt="" style="max-width:{{settings.h4_logo1_max_width}}px"/></a>
+						
+							</div>
+							<div class="mini-cart-box mini-cart1 pull-right">
+								<a class="mini-cart-link" href="/cart">
+									<span class="mini-cart-icon title18 color"><i class="fa fa-shopping-basket"></i></span>
+									<span class="mini-cart-number"><span class="CartCount">{{ cart.item_count }}</span> {{ 'minicart.general.items' | t }} - <span class="color" id="CartCost"> {{cart.total_price | money}}</span></span>
+								</a>
+								{% include "mini-cart" %}
+							</div>
+							<form class="search-form search-form5 pull-right" method="get" action="/search" role="search">
+                              <input type="hidden" name="type" value="product">
+                              <input onblur="if (this.value=='') this.value = this.defaultValue" onfocus="if (this.value==this.defaultValue) this.value = ''" value="{{ 'general.search.placeholder' | t }}" type="text" name="q" >
+                              <input type="submit" value="" />
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Main Header -->
+			<div class="nav-header5 bg-white header-ontop">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<nav class="main-nav main-nav5">
+								{%include 'menu'%}
+								<a href="#" class="toggle-mobile-menu"><span></span></a>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Nav Header -->
+		</div>
+	</header>
+

@@ -1,0 +1,7 @@
+
+
+<form class="search-form pull-left" method="get" action="/search" role="search">
+  <input type="hidden" name="type" value="product">
+  <input onblur="if (this.value=='') this.value = this.defaultValue" onfocus="if (this.value==this.defaultValue) this.value = ''" value="{{ 'general.search.placeholder' | t }}" type="text" name="q" >
+  <input type="submit" value="" />
+</form>

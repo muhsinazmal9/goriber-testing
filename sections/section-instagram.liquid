@@ -1,0 +1,178 @@
+
+
+{% assign instafeed_img = '{{image}}' %}
+{% assign instafeed_link = '{{link}}' %}
+{% assign instafeed_like = '{{likes}}' %}
+{% assign instafeed_comment = '{{comments}}' %}
+
+{%if section.settings.section_ins_userid != blank and section.settings.section_ins_access_token != blank  %}
+<script>
+  jQuery(document).ready(function($) {
+
+    var feed = new Instafeed({
+      get: 'user',
+      userId: '{{settings.section_ins_userid}}',
+      accessToken: '{{settings.section_ins_access_token}}',
+      template: ' <li><div class="banner-adv zoom-image overlay-image"><a href="{{instafeed_link}}" class="adv-thumb-link"><img src="{{instafeed_img}}" alt="" /></a></div></li>',
+      target: 'instagram1',
+      resolution: 'thumbnail',
+      limit: '{{section.settings.section_ins_limit}}',
+      sortBy:'{{section.settings.section_ins_sort}}'
+
+    });
+    feed.run();
+
+  }); 
+</script>
+{%endif%}
+
+
+<div data-section-id="{{ section.id }}" data-section-type="section-instagram" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="instagram">
+    <div class="container">
+         
+      <div class="photo-instagram" >
+				<h2 class="color2 title-box2 title30 text-center">{{section.settings.section_ins_title}}</h2>
+        {%if section.settings.section_ins_userid != blank and section.settings.section_ins_access_token != blank  %}
+        <ul class="list-inline-block text-center list-photo-in" id="instagram1">
+        </ul>
+                     {%else%}
+                  <ul class="list-inline-block text-center list-photo-in" id="instagram1">
+                    <li>
+                    <div class="banner-adv zoom-image overlay-image">
+                      <a href="#" class="adv-thumb-link"><img src="{{'in2.png'|asset_url}}" alt="" /></a>
+                    </div>
+                  </li>
+                    <li>
+                    <div class="banner-adv zoom-image overlay-image">
+                      <a href="#" class="adv-thumb-link"><img src="{{'in2.png'|asset_url}}" alt="" /></a>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="banner-adv zoom-image overlay-image">
+                      <a href="#" class="adv-thumb-link"><img src="{{'in2.png'|asset_url}}" alt="" /></a>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="banner-adv zoom-image overlay-image">
+                      <a href="#" class="adv-thumb-link"><img src="{{'in2.png'|asset_url}}" alt="" /></a>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="banner-adv zoom-image overlay-image">
+                      <a href="#" class="adv-thumb-link"><img src="{{'in2.png'|asset_url}}" alt="" /></a>
+                    </div>
+                  </li>
+                    
+				</ul>
+            {%endif%}
+			</div>
+   
+
+      
+		</div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Section Instagram",
+  "class": "index-section",
+  "settings": [
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+	  {
+        "type": "header",
+        "content": "settings"
+      },
+      {
+        "type": "text",
+        "id": "section_ins_title",
+        "label": "Title",
+        "default": "#PHOTO IN INSTAGRAM"
+      },
+      {
+        "type": "text",
+        "id": "section_ins_userid",
+        "label": "User ID Instagram",
+        "default": "3672948962"
+      },
+      {
+        "type": "text",
+        "id": "section_ins_limit",
+        "label": "Limit",
+        "default": "5"
+      },
+      {
+        "type": "text",
+        "id": "section_ins_access_token",
+        "label": "Access Token Instagram",
+        "default": "3672948962.0f64772.430edb7f711e4665b59777c54d1ed9ce"
+      },
+      {
+        "type": "select",
+        "id": "section_ins_sort",
+        "label": "sort by",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "most-recent",
+            "label": "most recent"
+          },
+          {
+            "value": "least-recent",
+            "label": "least recent"
+          },
+          {
+            "value": "most-liked",
+            "label": "most liked"
+          },
+          {
+            "value": "least-liked",
+            "label": "least-liked"
+          },
+          {
+            "value": "most-commented",
+            "label": "most-commented"
+          },
+          {
+            "value": "least-commented ",
+            "label": "least-commented "
+          },
+          {
+            "value": "random",
+            "label": "random"
+          }
+        ]
+      }
+
+		
+	  
+      
+  ],
+ 
+  "presets": [{
+    "name": "Instagram v2 ",
+    "category": "Instagram"
+   
+  }]
+}
+{% endschema %}
+

@@ -1,0 +1,147 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="section-collection-tab-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="collection-tab-v2">
+    
+    <div class="product-price-off">
+			<div class="container">
+				<h2 class="title30 text-center font-bold">{{section.settings.collection_title}}</h2>
+				<ul class="list-inline-block text-center {%if section.settings.style == 'style1'%} title-tab-icon3{%else%}title-tab-icon{%endif%}">
+                  {%for block in section.blocks %}
+                  <li {%if forloop.index == 1%}class="active"{%else%}{%endif%}><a href="#{{collections[block.settings.product_collection].handle}}{{ section.id }}" data-toggle="tab"><img class="wobble-horizontal" {%if block.settings.product_icon == blank%} src="{{"fru2.png"|asset_url}}"{%else%}src="{{block.settings.product_icon|img_url:'small'}}"{%endif%} alt="" /><span>{{block.settings.product_collection_title}}</span></a></li>
+                  {%endfor%}
+				
+				</ul>
+				<div class="tab-content">
+					{%for block in section.blocks %}
+					 <div id="{{collections[block.settings.product_collection].handle}}{{ section.id }}" class="tab-pane {%if forloop.index == 1%}active{%else%}{%endif%}">
+          	         <div class="list-price-off clearfix">
+                       {%for product in collections[block.settings.product_collection].products limit:block.settings.product_limit%}
+                              {%include 'product-item-v7'%}
+                              {%else%}
+                              {%include 'product-item-v7-empty'%}
+                              {%endfor%}
+
+						</div>
+						<div class="text-center">
+							<a href="{{ collections[block.settings.product_collection].url}}" class="btn-arrow color">{{block.settings.product_button}}</a>
+						</div>
+					</div>
+                   {%endfor%}
+					
+				</div>
+			</div>
+		</div>
+ 
+  </section>
+</div>
+
+{% schema %}
+
+  {
+    "name": "collection tab v4",
+    "class" : "index-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "collection_title",
+        "label": "Title",
+        "default": "FEATURED PRODUCTS"
+      },
+      {
+        "type": "select",
+        "id": "style",
+        "label": "Select style",
+        "options": [
+          {
+            "value": "style1",
+            "label": "style 01"
+          },
+		  {
+            "value": "style2",
+            "label": "style 02"
+          }
+        ],
+        "default":"style1"
+      }
+      
+      
+
+    ],
+    "blocks": [
+      {
+      "type": "Collection",
+      "name": "Collection",
+      "settings": [
+    	{
+          "type": "text",
+          "id": "product_collection_title",
+          "label": "Title",
+          "default":"product"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_icon",
+          "label": "Icon"
+        },
+        {
+          "type": "collection",
+          "id": "product_collection",
+          "label": "Select collection"
+        },
+        {
+          "type": "text",
+          "id": "product_limit",
+          "label": "Product limit",
+          "default":"8"
+        },
+        {
+          "type": "text",
+          "id": "product_button",
+          "label": "text button",
+          "default":"View all"
+        }
+      ]
+      }
+
+    ],
+    "presets": [
+      {
+        "name": "Collection tab v4",
+        "category": "Collection",
+        "blocks": [
+                {
+                "type": "Collection"
+                },
+                {
+                "type": "Collection"
+                },
+                {
+                "type": "Collection"
+                },
+                {
+                "type": "Collection"
+                },
+                {
+                "type": "Collection"
+                }
+            ]
+      }
+    ]
+  }
+{% endschema %}

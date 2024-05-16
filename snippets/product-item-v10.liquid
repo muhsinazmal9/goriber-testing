@@ -1,0 +1,44 @@
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}	
+
+<div class="item-deal-product5">
+  <div class="product-thumb">
+    <a href="{{ product.url | within: collection }}" class="product-thumb-link zoomout-thumb">
+      <img src="{{ product.featured_image.src | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" >
+      {% for image in product.images %}
+      {% if forloop.last == true %}
+      <img src="{{ image.src | product_img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" >
+      {%endif%}
+      {% endfor %}
+    </a>
+    <a href="javascript:void(0)" data-id="{{ product.handle }}" class="quickview-link quick-view engoj-btn-quickview"><i class="fa fa-search" aria-hidden="true"></i></a>
+
+
+    {% if on_sale %}
+    {%assign price_sale = product.compare_at_price |minus: product.price%}
+    {% assign deals_percent = price_sale |times:100|divided_by: product.compare_at_price %}  
+    <div class="product-label sale-label">-{{deals_percent}}%</div>
+    {% endif %}
+  </div>
+  <div class="product-info text-center">
+    <div class="product-price">
+      {% capture price %}{{ product.price | money }}{% endcapture %}
+      {% if on_sale %}
+      <del class="silver"><span>{{ product.compare_at_price | money }}</span></del>
+      {% endif %}
+      {% if product.price_varies %}
+      <ins class="color"><span>{{ 'products.general.from_text_html' | t: price: price }}</span></ins>
+      {% else %}
+      <ins class="color"><span>{{ price }}</span></ins>
+
+      {% endif %}
+    </div>
+  </div>
+</div>

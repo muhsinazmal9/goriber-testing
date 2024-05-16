@@ -1,0 +1,176 @@
+{% comment %}
+
+  Comments will not appear right after they are submitted, either to be checked for spam
+  or to await moderation. When a comment is submitted, the browser is redirected to a page
+  that includes the new comment id in its URL.
+    Example: http://shopname.myshopify.com/blogs/news/2022072-my-post?comment=3721372
+
+  More information:
+    - http://docs.shopify.com/themes/liquid-variables/comment
+
+{% endcomment %}
+
+{% assign number_of_comments = article.comments_count %}
+
+{% comment %}
+  If a comment was just submitted and it has no blank fields, we have an extra comment to count.
+{% endcomment %}
+{% if comment and comment.created_at %}
+  {% assign number_of_comments = article.comments_count | plus: 1 %}
+{% endif %}
+
+
+
+<section id="content">
+		<div class="container">
+			{%include 'breadcrumb'%}
+			<!-- ENd Banner -->
+			<div class="content-shop">
+				<div class="row">
+					<div class="col-md-3 col-sm-4 col-xs-12">
+						{%include 'blog-sidebar' %}
+					</div>
+					<div class="col-md-9 col-sm-8 col-xs-12">
+						<div class="main-content-single">
+							<div class="single-head">
+								<h2 class="title30 font-bold">{{article.title}}</h2>
+								<ul class="list-inline-block blog-comment-date">
+									<li><label>{{'blogs.article.category'|t}}: </label><a href="{{blog.url}}" class="color">{{blog.title}}</a></li>
+									<li><label>{{'blogs.article.date_post'|t}} </label><span class="color">{{article.published_at | date: " %d %B , %Y " }}</span></li>
+                                    <li><label>{{'blogs.comments.comments_with_count.other'|t}} </label><a href="#" class="color">{{article.comments_count}} </a></li>
+								</ul>
+							</div>	
+							<div class="single-thumbnail banner-adv zoom-out overlay-image">
+								
+                                  
+                                    <a href="{{ article.url}}" class="adv-thumb-link" >
+                                      <img src="{{ article.image.src | img_url: 'grande' }}" alt="">
+                                      <img src="{{ article.image.src | img_url: 'grande' }}" alt="">
+                                  </a>
+							
+							</div>
+							
+                          
+                           {{ article.content}}
+                          
+                          <div class="table tags-share">
+								<div class="text-left">
+									<div class="single-tabs">
+										<span>{{'blogs.article.tags'|t}}: </span>
+									
+                                      {% for tag in article.tags %}
+                                      {{ tag | link_to_tag: tag }}
+                                      {% endfor %}
+                                      
+									</div>
+								</div>
+                            <div class="text-right blog-social">
+                              <span>{{'blogs.article.share'|t}} </span>
+                              {%include 'social-share'%}
+                            </div>
+							</div>
+							
+							<div class="single-post-control table">
+								<div class="text-left post-control-prev">
+									<a href="{{blog.previous_article}}" class="btn-arrow color text-uppercase">{{'blogs.article.prev'|t}} </a>
+								
+								</div>
+								<div class="text-right post-control-next">
+									<a href="{{blog.next_article}}" class="btn-arrow color text-uppercase">{{'blogs.article.next'|t}} </a>
+									
+								</div>
+                  
+							</div>
+                          
+                          
+                          {% if blog.comments_enabled? %}
+                          {% comment %}
+                          Just like blog.liquid page, define how many comments should be on each page.
+                          {% endcomment %}
+                          {% paginate article.comments by 5 %}
+                          {% comment %}
+                          #comments is required, it is used as an anchor link by Shopify.
+                          {% endcomment %}
+
+                          {% if comment and comment.created_at %}
+                          <p class="note form-success">
+                            {% if blog.moderated? %}
+                            {{ 'blogs.comments.success_moderated' | t }}
+                            {% else %}
+                            {{ 'blogs.comments.success' | t }}
+                            {% endif %}
+                          </p>
+                          {% endif %}
+                          <h3 class="title">Comments</h3>
+                          {% for comment in article.comments %}
+                          <div class="single-author table">
+                            <div class="single-author-avatar">
+                              <a href="#"><img src="{{section.settings.image_avata|img_url:'small'}}" alt="" /></a>
+                            </div>
+                            <div class="single-author-info">
+                              <h3 class="title18 font-bold"><a href="#" class="black">{{ comment.author }}</a></h3>
+                         
+                              <p class="desc">{{ comment.content }}</p>
+                            </div>
+                          </div>
+                          {% endfor %}
+                          {% if paginate.pages > 1 %}
+                          <div class="pagination">
+                            {%include 'pagination'%}
+                          </div>
+                          {% endif %}
+                          {% endpaginate %}
+
+                          <!-- End panel -->
+
+                          
+                          
+                    
+							<div class="single-comment" id="comment">
+								<h2 class="title30 font-bold">{{'blogs.comments.title'|t}}</h2>
+                              {% form 'new_comment', article %}
+								<div class="single-comment-form">
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<label>Comment *</label>
+										
+                                          <textarea class="border" cols="30" rows="10" placeholder="{{'blogs.comments.comments_with_count.one'|t}} *" name="comment[body]" id="CommentBody" >{{ form.body }}</textarea>
+     
+											<input type="submit" value="Submit Comment" class="btn-arrow color text-uppercase" />
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<label>Display Name *</label>
+										
+                                          <input class="border" value="" type="text" name="comment[author]" id="CommentAuthor" placeholder="{{'blogs.comments.name'|t}} *">
+											<label>Email Address * </label><span class="silver">(will not be shared)</span>
+                                          <input class="border" value="" type="email" name="comment[email]" id="CommentEmail" placeholder="{{'blogs.comments.email'|t}} *">
+										
+										</div>
+									</div>
+								</div>
+                               {% endform %}
+							</div>
+                          {%endif%}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Content Shop -->
+		</div>
+	</section>
+
+{% schema %}
+{
+  "name": "article pages",
+  "settings": [
+		{
+		  "type":"image_picker",
+		  "id":"image_avata",
+          "label": "Customer avatar in Comments"
+        }
+	    
+
+	
+  ]
+}
+{% endschema %}

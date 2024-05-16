@@ -1,0 +1,125 @@
+
+
+<div data-section-id="{{ section.id }}" data-section-type="section-blog-v3" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="blog-v3">
+    <div class="container">
+      <div class="list-post-format3">
+        <div class="row">
+          {% for article in blogs[section.settings.select_blog].articles limit: 3 %}
+          {%if forloop.index == 1%}
+          <div class="col-md-3 hidden-sm hidden-xs">
+            <div class="item-post-format3">
+              <div class="banner-adv fade-out-in zoom-image">
+                 <a href="{{article.url}}" class="adv-thumb-link"><img src="{{ article.image.src | img_url: 'large' }}" alt="" /></a>
+              </div>
+              <div class="post-info">
+                <h3 class="title18 text-uppercase"><a href="{{ article.url}}" class="black">{{article.title}}</a></h3>
+                <p class="silver post-author-date"><a href="#">{{article.author }}</a> - {{article.published_at | date: " %d %B , %Y " }}</p>
+                <p class="desc">{{ article.content | strip_html | truncate: 150 }}</p>
+                <a href="{{ article.url}}" class="shop-button">{{section.settings.section_see_all}}</a>
+              </div>
+            </div>
+          </div>
+          {%endif%}
+          {%if forloop.index == 2%}
+          <div class="col-md-6 col-sm-12">
+            <div class="item-post-format3">
+              <div class="banner-adv line-scale zoom-rotate">
+                <a href="{{article.url}}" class="adv-thumb-link"><img src="{{ article.image.src | img_url: 'large' }}" alt="" /></a>
+              </div>
+              <div class="post-info">
+                <h3 class="title18 text-uppercase"><a href="{{ article.url}}" class="black">{{article.title}}</a></h3>
+                <p class="silver post-author-date"><a href="#">{{article.author }}</a> - {{article.published_at | date: " %d %B , %Y " }}</p>
+                <p class="desc">{{ article.content | strip_html | truncate: 150 }}</p>
+                <a href="{{ article.url}}" class="shop-button">{{section.settings.section_see_all}}</a>
+              </div>
+            </div>
+          </div>
+          {%endif%}
+          {%if forloop.index == 3%}
+          <div class="col-md-3 col-sm-6 col-xs-6">
+            <div class="item-post-format3">
+              <div class="banner-adv fade-out-in zoom-image">
+                <a href="{{article.url}}" class="adv-thumb-link"><img src="{{ article.image.src | img_url: 'large' }}" alt="" /></a>
+              </div>
+              <div class="post-info">
+                <h3 class="title18 text-uppercase"><a href="{{ article.url}}" class="black">{{article.title}}</a></h3>
+                <p class="silver post-author-date"><a href="#">{{article.author }}</a> - {{article.published_at | date: " %d %B , %Y " }}</p>
+                <p class="desc">{{ article.content | strip_html | truncate: 150 }}</p>
+                <a href="{{ article.url}}" class="shop-button">{{section.settings.section_see_all}}</a>
+              </div>
+            </div>
+          </div>
+          {%endif%}
+           {%if forloop.index == 1%}
+          <div class="hidden-lg hidden-md col-sm-6 col-xs-6">
+            <div class="item-post-format3">
+              <div class="banner-adv fade-out-in zoom-image">
+                <a href="{{article.url}}" class="adv-thumb-link"><img src="{{ article.image.src | img_url: 'large' }}" alt="" /></a>
+              </div>
+              <div class="post-info">
+                <h3 class="title18 text-uppercase"><a href="{{ article.url}}" class="black">{{article.title}}</a></h3>
+                <p class="silver post-author-date"><a href="#">{{article.author }}</a> - {{article.published_at | date: " %d %B , %Y " }}</p>
+                <p class="desc">{{ article.content | strip_html | truncate: 150 }}</p>
+                <a href="{{ article.url}}" class="shop-button">{{section.settings.section_see_all}}</a>
+              </div>
+            </div>
+          </div>
+           {%endif%}
+          
+ 
+          {%endfor%}
+        </div>
+      </div>
+      
+      
+    </div>
+
+  </section>
+</div>
+
+{% schema %}
+
+  {
+    "name": "Blog v3",
+    "class" : "index-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      
+      {
+        "type": "blog",
+        "id": "select_blog",
+        "label": "Select blog"
+      },
+	  {
+        "type": "text",
+        "id": "section_see_all",
+        "label": "view more",
+        "default": "Read more"
+      }
+
+    ],
+   
+    "presets": [
+      {
+        "name": "Blog v3",
+        "category": "Blog"
+      }
+    ]
+  }
+{% endschema %}

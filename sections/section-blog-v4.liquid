@@ -1,0 +1,105 @@
+
+
+<div data-section-id="{{ section.id }}" data-section-type="section-blog-v4" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="blog-v4">
+<div class="container">
+    <div class="latest-news4 bg-white drop-shadow">
+			
+				<h2 class="title30 font-bold title-box1 text-center">{{section.settings.section_title}}</h2>
+				<div class="row">
+                  {% for article in blogs[section.settings.select_blog].articles limit: 2 %}
+                  {%if forloop.index == 1%}
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="item-post1">
+							<div class="post-thumb banner-adv overlay-image zoom-image">
+								<a href="{{article.url}}" class="adv-thumb-link"><img src="{{ article.image.src | img_url: 'large' }}" alt="" /></a>
+							</div>
+							<div class="post-info">
+								<a href="#" class="post-cat">{{blogs[section.settings.select_blog].title}}</a>
+								<h3 class="title18"><a href="{{ article.url}}" class="black">{{article.title}}</a></h3>
+								<p class="post-author-date silver">by <b class="text-uppercase">{{article.author}}</b>  {{article.published_at | date: " %d %B , %Y " }}</p>
+								<p class="desc">{{ article.content | strip_html | truncate: 150 }}</p>
+							</div>
+						</div>
+					</div>
+                  {%endif%}
+                  {%if forloop.index == 2 %}
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="item-post1">
+							
+							<div class="post-info">
+								<a href="#" class="post-cat">{{blogs[section.settings.select_blog].title}}</a>
+								<h3 class="title18"><a href="{{ article.url}}" class="black">{{article.title}}</a></h3>
+								<p class="post-author-date silver">by <b class="text-uppercase">{{article.author}}</b>  {{article.published_at | date: " %d %B , %Y " }}</p>
+								<p class="desc">{{ article.content | strip_html | truncate: 150 }}</p>
+							</div>
+                          <div class="post-thumb banner-adv overlay-image zoom-image">
+								<a href="{{article.url}}" class="adv-thumb-link"><img src="{{ article.image.src | img_url: 'large' }}" alt="" /></a>
+							</div>
+						</div>
+					</div>
+                  {%endif%}
+                  {% endfor %}
+				</div>
+				<div class="text-center">
+                  <a href="{{blogs[section.settings.select_blog].url}}" class="btn-arrow color">{{section.settings.section_see_all}}</a>
+              </div>
+			</div>
+		</div>
+			
+	
+  </section>
+</div>
+
+{% schema %}
+
+  {
+    "name": "Blog v4",
+    "class" : "index-section",
+    "settings": [
+       {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "section_title",
+        "label": "Title",
+        "default": "Lastest From Blog"
+      },
+      {
+        "type": "blog",
+        "id": "select_blog",
+        "label": "Select blog"
+      },
+	  {
+        "type": "text",
+        "id": "section_see_all",
+        "label": "view more",
+        "default": "view all"
+      }
+	  
+	  
+     
+    ],
+   
+    "presets": [
+      {
+        "name": "Blog v4",
+        "category": "Blog"
+      }
+    ]
+  }
+{% endschema %}

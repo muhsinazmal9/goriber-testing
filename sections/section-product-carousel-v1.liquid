@@ -1,0 +1,97 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="section-product-carousel-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+  
+  
+  <section class="collection-tab-carousel">
+ 
+    <div class="featured-product" style="background-color: {{section.settings.collection_bg_color}};
+                                         {%if section.settings.collection_bg_image1 != blank and section.settings.collection_bg_image2 != blank %}
+                                         background-image: url({{section.settings.collection_bg_image1|img_url:'large'}}), url({{section.settings.collection_bg_image2|img_url:'large'}});
+                                         {%endif%}
+                                         background-repeat: no-repeat;
+    background-position: left top,right top;
+    background-size: auto 100%;">
+			<div class="container">
+				<h2 class="title30 font-bold title-box1 text-center">{{section.settings.collection_title}}</h2>
+				<div class="featured-product-slider">
+					<div class="wrap-item group-navi" data-navigation="true" data-pagination="false" data-autoplay="true" data-itemscustom="[[0,1]]">
+						{%for product in collections[section.settings.collection_product].products limit:section.settings.collection_product_limit%}
+                          {%include 'product-item-v2'%}
+                          {%else%}
+                          {%include 'product-item-v2-empty'%}
+                          {%endfor%}
+					</div>
+				</div>
+			</div>
+		</div>	
+  </section>
+</div>
+
+{% schema %}
+
+  {
+    "name": "Product carousel v1",
+    "class" : "index-section",
+    "settings": [
+	  
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "collection_title",
+        "label": "Title",
+        "default": "Featureds Products"
+      },
+      {
+        "type": "color",
+        "id": "collection_bg_color",
+        "label": "background color"
+      },
+      {
+        "type": "image_picker",
+        "id": "collection_bg_image1",
+        "label": "background image left"
+      },
+      {
+        "type": "image_picker",
+        "id": "collection_bg_image2",
+        "label": "background image right"
+      },
+      {
+        "type": "collection",
+        "id": "collection_product",
+        "label": "Select collection"
+      },
+      {
+        "type": "text",
+        "id": "collection_product_limit",
+        "label": "limit product",
+        "default":"4"
+      }
+      
+    ],
+    
+    "presets": [
+      {
+        "name": "product carousel v1",
+        "category": "Collection"
+        
+      }
+    ]
+  }
+{% endschema %}

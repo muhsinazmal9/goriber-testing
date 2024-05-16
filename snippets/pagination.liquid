@@ -1,0 +1,22 @@
+
+
+
+<div class="pagibar text-center">
+  {% if paginate.previous %}
+  <a href="{{ paginate.previous.url }}" class="next-page"> <i class="icon ion-ios-arrow-thin-left"></i></a>
+  {% endif %}
+  {% for part in paginate.parts %}
+  {% if part.is_link %}
+  <a href="{{ part.url }}">{{ part.title }}</a>
+  {% else %}
+  {% if part.title == paginate.current_page %}
+  <a href="{{ part.url }}" class="current-page">{{ part.title }}</a>
+  {% else %}
+  <a href="{{ part.url }}" >{{ part.title }}</a>
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+  {% if paginate.next %}
+  <a href="{{ paginate.next.url }}" class="next-page"> <i class="icon ion-ios-arrow-thin-right"></i></a>
+  {% endif %}
+</div>

@@ -1,0 +1,16 @@
+<div class="social-network">
+ 
+{%for i in (1..6)%}
+{%capture _enable%}f_social{{i}}_enable{%endcapture%}
+{%capture _text%}f_social{{i}}_text{%endcapture%}
+{%capture _icon%}f_social{{i}}_icon.png{%endcapture%}
+{%capture _url%}f_social{{i}}_url{%endcapture%}
+
+{%assign enable = settings[_enable]%}
+{%assign icon = settings[_icon]%}
+{%assign url = settings[_url]%}
+{%if enable%}
+<a href="{{url}}" target="_blank"><img src="{{_icon|asset_url}}" alt="" /></a>
+{%endif%}
+{%endfor%}
+  </div>

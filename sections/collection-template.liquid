@@ -1,0 +1,220 @@
+
+
+{%if template contains 'collection.24' %}
+	{%- assign product_per_page = 24 -%}
+{% elsif template contains 'collection.48' %}
+	{%- assign product_per_page = 48 -%}
+{% else %}
+  {%- assign product_per_page = section.settings.product_limit -%}
+{% endif %}
+
+{% paginate collection.products by product_per_page %}
+
+
+
+<section id="content">
+		<div class="container">
+			  {%include 'breadcrumb'%}
+			<!-- ENd Banner -->
+			<div class="content-shop">
+				<div class="row">
+					<div class="col-md-3 col-sm-4 col-xs-12">
+                      {% include 'collection-sidebar' %}
+					</div>
+					<div class="col-md-9 col-sm-8 col-xs-12">
+						<div class="main-content-shop">
+							
+                          {% include "product-sortings" %} 
+                          <div class="grid--uniform">
+							<div  id="tabs-grid" class="product-grid-view ">
+								<div class="row">
+                                  {% for product in collection.products %}
+                                  
+                                  
+                                  {% assign on_sale = false %}
+                                  {% if product.compare_at_price > product.price %}
+                                  {% assign on_sale = true %}
+                                  {% endif %}
+
+                                  {% assign sold_out = true %}
+                                  {% if product.available %}
+                                  {% assign sold_out = false %}
+                                  {% endif %}	
+									<div class="col-md-4 col-sm-6 col-xs-6">
+										<div class="item-product item-product-grid text-center">
+											<div class="product-thumb">
+												
+                                              <a href="{{ product.url | within: collection }}" class="product-thumb-link rotate-thumb">
+                                                <img src="{{ product.featured_image.src | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" >
+                                                {% for image in product.images %}
+                                                {% if forloop.last == true %}
+                                                <img src="{{ image.src | product_img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" >
+                                                {%endif%}
+                                                {% endfor %}
+
+
+                                              </a>
+											
+											</div>
+											<div class="product-info">
+												<h3 class="product-title"><a href="{{ product.url | within: collection }}">{{product.title}}</a></h3>
+												<div class="product-price">
+                                                  {% capture price %}{{ product.price | money }}{% endcapture %}
+                                                  {% if on_sale %}
+                                                  <del class="silver"><span>{{ product.compare_at_price | money }}</span></del>
+                                                  {% endif %}
+                                                  {% if product.price_varies %}
+                                                  <ins class="color"><span>{{ 'products.general.from_text_html' | t: price: price }}</span></ins>
+                                                  {% else %}
+                                                  <ins class="color"><span>{{ price }}</span></ins>
+
+                                                  {% endif %}
+                                                  
+												
+												</div>
+												<div class="product-rate">
+													 <div class="product-rating shopify-product-reviews-badge" data-id="{{ product.id }}"></div>
+												</div>
+                                              <div class="product-extra-link">
+                                                {%include 'add-wishlist'%}
+
+                                                {% if sold_out %}
+                                                <a class="addcart-link" href="{{ product.url | within: collection }}" title="sold out">
+                                             {{settings.product_sold_out }}
+                                                </a>
+                                                {% else %}
+                                                {% if product.variants.size > 1 %}
+                                                <a class="addcart-link" href="{{ product.url | within: collection }}" title="{{settings.product_select_option_name }}">
+                                                {{settings.product_select_option_name }}
+                                                </a>
+
+                                                {% else %}
+
+                                                <form method="post" action="/cart/add">
+                                                  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                                                  <button type="submit" name="add" id="AddToCart{{ product.id }}" class="addcart-link add-to-cart-button enj-add-to-cart-btn" title="{{ settings.product_cart_name }}">
+                                                    {{ settings.product_cart_name }}
+                                                  </button>
+                                                </form>
+                                                {% endif %}
+                                                {% endif %}
+                                                <a href="javascript:void(0)" data-id="{{ product.handle }}"  class="compare-link quick-view engoj-btn-quickview"><i class="fa fa-search" aria-hidden="true"></i><span>{{ settings.product_quickview_name }}</span></a>
+                                              </div>
+											</div>
+										</div>
+									</div>
+									{%endfor%}
+								</div>
+							</div>
+                          <div id="tabs-list"  class="product-list-view " style="display:none;">
+                            {% for product in collection.products %}
+                                  
+                                  
+                                  {% assign on_sale = false %}
+                                  {% if product.compare_at_price > product.price %}
+                                  {% assign on_sale = true %}
+                                  {% endif %}
+
+                                  {% assign sold_out = true %}
+                                  {% if product.available %}
+                                  {% assign sold_out = false %}
+                                  {% endif %}	
+								<div class="item-product item-product-list" >
+                                  
+									<div class="row">
+										<div class="col-md-4 col-sm-5 col-xs-5">
+											<div class="product-thumb">
+													
+                                              <a href="{{ product.url | within: collection }}" class="product-thumb-link rotate-thumb">
+                                                <img src="{{ product.featured_image.src | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" >
+                                                {% for image in product.images %}
+                                                {% if forloop.last == true %}
+                                                <img src="{{ image.src | product_img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" >
+                                                {%endif%}
+                                                {% endfor %}
+
+
+                                              </a>
+													</div>
+										</div>
+										<div class="col-md-8 col-sm-7 col-xs-7">
+											<div class="product-info">
+												<h3 class="product-title"><a href="{{ product.url | within: collection }}">{{product.title}}</a></h3>
+												<div class="product-price">
+													{% capture price %}{{ product.price | money }}{% endcapture %}
+                                                  {% if on_sale %}
+                                                  <del class="silver"><span>{{ product.compare_at_price | money }}</span></del>
+                                                  {% endif %}
+                                                  {% if product.price_varies %}
+                                                  <ins class="color"><span>{{ 'products.general.from_text_html' | t: price: price }}</span></ins>
+                                                  {% else %}
+                                                  <ins class="color"><span>{{ price }}</span></ins>
+
+                                                  {% endif %}
+												</div>
+												<div class="product-rate">
+													<div class="product-rating shopify-product-reviews-badge" data-id="{{ product.id }}"></div>
+												</div>
+												<div class="desc">{{product.description |strip_html | truncate: 150}}</div>
+												<div class="product-extra-link">
+                                                {%include 'add-wishlist'%}
+
+                                                {% if sold_out %}
+                                                <a class="addcart-link" href="{{ product.url | within: collection }}" title="sold out">
+                                                  {{settings.product_sold_out }}
+                                                </a>
+                                                {% else %}
+                                                {% if product.variants.size > 1 %}
+                                                <a class="addcart-link" href="{{ product.url | within: collection }}" title="{{settings.product_select_option_name }}">
+                                               {{settings.product_select_option_name }}
+                                                </a>
+
+                                                {% else %}
+
+                                                <form method="post" action="/cart/add">
+                                                  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                                                  <button type="submit" name="add" id="AddToCart{{ product.id }}" class="addcart-link add-to-cart-button enj-add-to-cart-btn" title="{{ settings.product_cart_name }}">
+                                                    {{ settings.product_cart_name }}
+                                                  </button>
+                                                </form>
+                                                {% endif %}
+                                                {% endif %}
+                                                <a href="javascript:void(0)" data-id="{{ product.handle }}" class="compare-link quick-view engoj-btn-quickview"><i class="fa fa-search" aria-hidden="true"></i><span>{{ settings.product_quickview_name }}</span></a>
+                                              </div>
+											</div>
+										</div>
+									</div>
+								</div>
+                            {%endfor%}
+								
+							</div>
+                          </div>
+                          {% if paginate.pages > 1 %}
+                          {% include 'pagination' %}
+                          {% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Content Shop -->
+		</div>
+	</section>
+
+
+{% endpaginate %}
+
+{% schema %}
+  {
+    "name": "Collection pages",
+    "settings": [
+	
+	  {
+        "type": "text",
+        "id": "product_limit",
+        "label": "Product per page",
+        "default": "20"
+      }
+      
+    ]
+  }
+{% endschema %}

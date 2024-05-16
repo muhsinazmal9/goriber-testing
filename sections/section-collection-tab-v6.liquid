@@ -1,0 +1,131 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="section-collection-tab-v6" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="collection-tab-v1">
+    
+    
+    
+    
+    <div class="container">
+			<div class="product-bestsale best-sale6">
+				<h2 class="title30 font-bold title-box1 text-center">{{section.settings.collection_title}}</h2>
+				<ul class="text-center title-tab1 list-inline-block">
+                  {%for block in section.blocks %}
+                  <li {%if forloop.index == 1%}class="active"{%else%}{%endif%}><a href="#{{collections[block.settings.product_collection].handle}}{{ section.id }}" data-toggle="tab">{{block.settings.product_collection_title}}</a></li>
+                  {%endfor%}
+				</ul>
+				<div class="tab-content">
+                  {%for block in section.blocks %}
+                   <div id="{{collections[block.settings.product_collection].handle}}{{ section.id }}" class="tab-pane {%if forloop.index == 1%}active{%else%}{%endif%}">
+           
+						<div class="product-loadmore">
+                          <div class="row">
+
+                            {%for product in collections[block.settings.product_collection].products limit:block.settings.product_limit%}
+                            {%include 'product-item-v11'%}
+                            {%else%}
+                            {%include 'product-item-v11-empty'%}
+                            {%endfor%}
+
+                          </div>
+							<div class="text-center">
+								<a href="{{collections[block.settings.product_collection].url}}" class="btn-arrow color text-uppercase loadmore-link">{{block.settings.product_view_more}}</a>
+							</div>
+						</div>
+					</div>
+                  {%endfor%}
+					<!-- End Tab -->
+				</div>
+			</div>
+			<!-- End Product Best Sale -->
+		</div>
+  </section>
+</div>
+
+{% schema %}
+
+  {
+    "name": "collection tab v6",
+    "class" : "index-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "collection_title",
+        "label": "Title",
+        "default": "Lastest Products"
+      }
+
+    ],
+    "blocks": [
+      {
+      "type": "Collection",
+      "name": "Collection",
+      "settings": [
+    	{
+          "type": "text",
+          "id": "product_collection_title",
+          "label": "Title",
+          "default":"product"
+        },
+        {
+          "type": "collection",
+          "id": "product_collection",
+          "label": "Select collection"
+        },
+        {
+          "type": "text",
+          "id": "product_limit",
+          "label": "Product limit",
+          "default":"8"
+        },
+
+        {
+          "type": "text",
+          "id": "product_view_more",
+          "label": "View more",
+          "default":"View more"
+        }
+      ]
+      }
+
+    ],
+    "presets": [
+      {
+        "name": "Collection tab v6",
+        "category": "Collection",
+        "blocks": [
+                {
+                "type": "Collection"
+                },
+                {
+                "type": "Collection"
+                },
+                {
+                "type": "Collection"
+                },
+                {
+                "type": "Collection"
+                },
+                {
+                "type": "Collection"
+                }
+            ]
+      }
+    ]
+  }
+{% endschema %}

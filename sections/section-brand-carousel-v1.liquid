@@ -1,0 +1,101 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="section-brand-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="brand-v1">
+ 
+    <div class="list-brand">
+			<div class="container">
+				<div class="brand-slider">
+					<div class="wrap-item" data-pagination="false" data-autoplay="true" data-itemscustom="[[0,2],[480,3],[768,4],[990,5]]">
+                      {%for block in section.blocks %}
+                      {%if block.type == 'brand' %}
+                      <div class="item-brand">
+                        <a href="{{block.settings.brand_url}}" title="brand"><img {%if block.settings.brand_image == blank%} src="{{'br3.png'| asset_url }}"  {%else%} src="{{block.settings.brand_image|img_url:'compact'}}"  {%endif%} alt="Brand"></a>
+                      </div>
+                      {%endif%}
+                      {%endfor%}
+						
+					</div>
+				</div>
+			</div>
+		</div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Section brand v1",
+  "class": "index-section",
+  "settings": [
+	 
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      }
+      
+  ],
+    "blocks": [
+
+	{
+      "type": "brand",
+      "name": "brand",
+      "settings": [
+    	{
+          "type": "image_picker",
+          "id": "brand_image",
+          "label": "Icon"
+        },
+		{
+          "type": "text",
+          "id": "brand_url",
+          "label": "Url",
+		  "default":"#"
+        }
+      ]
+      }
+
+    ],
+
+ 
+  "presets": [{
+    "name": "Brand v1",
+    "category": "brand",
+        "blocks": [
+               
+                {
+                "type": "brand"
+                },
+                {
+                "type": "brand"
+                },
+				{
+                "type": "brand"
+                },
+				{
+                "type": "brand"
+                },
+				{
+                "type": "brand"
+                },
+				{
+                "type": "brand"
+                },
+				{
+                "type": "brand"
+                }
+            ]
+   
+  }]
+}
+{% endschema %}

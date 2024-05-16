@@ -1,0 +1,108 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="section-brand-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="brand-v1">
+ 
+    <div class="container">
+    <div class="box-brand2">
+				<h2 class="color2 title30 text-center title-box2">{{section.settings.section_title}}</h2>
+				<div class="list-brand2">
+					
+					 {%for block in section.blocks %}
+                      {%if block.type == 'brand' %}
+                      <div class="item-brand2">
+                        <a href="{{block.settings.brand_url}}" class="border"><img class=" wobble-horizontal" {%if block.settings.brand_image == blank%} src="{{'br1.jpg'| asset_url }}"  {%else%} src="{{block.settings.brand_image|img_url:'medium'}}"  {%endif%} alt="Brand"></a>
+                      </div>
+                      {%endif%}
+                      {%endfor%}
+				</div>
+			</div>
+    </div>
+ 
+		
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Section brand v2",
+  "class": "index-section",
+  "settings": [
+	 
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+
+      {
+          "type": "text",
+          "id": "section_title",
+          "label": "Title",
+		  "default":"BRANDS"
+        }
+  ],
+    "blocks": [
+
+	{
+      "type": "brand",
+      "name": "brand",
+      "settings": [
+    	{
+          "type": "image_picker",
+          "id": "brand_image",
+          "label": "Icon"
+        },
+		{
+          "type": "text",
+          "id": "brand_url",
+          "label": "Url",
+		  "default":"#"
+        }
+      ]
+      }
+
+    ],
+
+ 
+  "presets": [{
+    "name": "Brand v2",
+    "category": "brand",
+        "blocks": [
+               
+                {
+                "type": "brand"
+                },
+                {
+                "type": "brand"
+                },
+				{
+                "type": "brand"
+                },
+				{
+                "type": "brand"
+                },
+				{
+                "type": "brand"
+                },
+				{
+                "type": "brand"
+                },
+				{
+                "type": "brand"
+                }
+            ]
+   
+  }]
+}
+{% endschema %}

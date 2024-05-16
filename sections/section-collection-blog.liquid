@@ -1,0 +1,327 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="section-collection-blog" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section >
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+         
+          <div class="main-content5">
+            {%for block in section.blocks%}
+            {%if block.type == "featured_product"%}
+            <div class="featured-product5">
+              <h2 class="title30 font-bold text-uppercase">{{block.settings.collection_title}}</h2>
+              <div class="product-slider5">
+                <div class="wrap-item group-navi" data-navigation="true" data-pagination="false" data-itemscustom="[[0,1]]">
+                
+                  
+                    {%for product in collections[block.settings.collection].products limit: 8 %}
+                  {%if forloop.index == 1 %}
+                  <div class="item">
+                    <div class="row">
+                      
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        {%include 'product-item-v8'%}
+                      </div>
+                 {%endif%}
+                      {%if forloop.index == 2 %}
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="list-product-type5">
+                      {%endif%}
+                          {%if forloop.index == 2 %}
+                          {%include 'product-item-v9'%}
+                          {%endif%}
+                          {%if forloop.index == 3 %}
+                          {%include 'product-item-v9'%}
+                          {%endif%}
+                          {%if forloop.index == 4 %}
+                          {%include 'product-item-v9'%}
+                          {%endif%}
+                          {%if collections[block.settings.collection].products_count < 4 and collections[block.settings.collection].products_count >= 1 %}
+                          {%assign i = collections[block.settings.collection].products_count %}
+                          {%else%}
+                          {%assign i = 4 %}
+                          {%endif%}
+                       {%if  forloop.index == i and  forloop.index != 1  %}
+                       
+                        </div>
+                      </div>
+                      {%endif%}
+                 {%if  forloop.index == i %}
+                      
+                    </div>
+                  </div>
+                  {%endif%}
+                  {%if forloop.index == 5 %}
+                  <div class="item">
+                    <div class="row">
+                      
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        {%include 'product-item-v8'%}
+                      </div>
+                 {%endif%}
+                      {%if forloop.index == 6 %}
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="list-product-type5">
+                      {%endif%}
+                          {%if forloop.index == 6 %}
+                          {%include 'product-item-v9'%}
+                          {%endif%}
+                          {%if forloop.index == 7 %}
+                          {%include 'product-item-v9'%}
+                          {%endif%}
+                          {%if forloop.index == 8 %}
+                          {%include 'product-item-v9'%}
+                          {%endif%}
+                          {%if collections[block.settings.collection].products_count <= 8 and collections[block.settings.collection].products_count > 4 %}
+                          {%assign n = collections[block.settings.collection].products_count %}
+                          {%else%}
+                          {%assign n = forloop.last %}
+                          {%endif%}
+                      {%if  forloop.index == n and  forloop.index != 5 %}
+                        </div>
+                      </div>
+                      {%endif%}
+                {%if  forloop.index == n %}
+                    </div>
+                  </div>
+                  {%endif%}
+                  
+                  
+
+                              {%else%}
+                              {%include 'product-item-v8-empty'%}
+                              {%endfor%}
+                  
+                  <!-- End Item -->
+                </div>
+              </div>
+            </div>
+            {%endif%}
+            {%endfor%}
+            <!-- End Featured Product -->
+            {%for block in section.blocks%}
+            {%if block.type == "banner"%}
+            <div class="banner-adv hoz-banner zoom-image overlay-image">
+              <a href="{{block.settings.banner_url}}" class="adv-thumb-link">
+                {%if block.settings.banner_image == blank %}
+                <img src="{{'ad5.jpg'|asset_url}}" alt="" />
+              {%else%}
+                <img src="{{block.settings.banner_image|img_url:'master'}}" alt="" />
+                {%endif%}
+              
+              </a>
+              <div class="banner-info">
+                <h2 class="title30 white paci-font">{{block.settings.banner_text}}</h2>
+              </div>
+            </div>
+            {%endif%}
+            {%endfor%}
+            <!-- End Banner -->
+            {%for block in section.blocks%}
+            {%if block.type == "blog"%}
+            <div class="latest-news5">
+              <h2 class="title30 text-uppercase font-bold">{{block.settings.blog_title}}</h2>
+              <div class="list-blog5">
+                <div class="row">
+                  {% for article in blogs[block.settings.blog_collection].articles limit: block.settings.blog_limit %}
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="item-blog5">
+                      <div class="banner-adv zoom-image">
+                      
+                        <a href="{{article.url}}" class="adv-thumb-link"><img src="{{ article.image.src | img_url: 'large' }}" alt="" /></a>
+                        <a href="{{blogs[block.settings.blog_collection].url}}" class="post-incat bg-color2">{{blogs[block.settings.blog_collection].title}}</a>
+                        
+                      </div>
+                      <div class="blog-info2">
+                        <h2 class="title18"><a href="{{ article.url}}" class="black">{{article.title}}</a></h2>
+                        <ul class="list-inline-block post-comment-date">
+                          <li><span class="color"><i class="fa fa-calendar-o"></i>{{article.published_at | date: " %d %B , %Y " }}</span></li>
+                          <li><span class="color"><i class="fa fa-commenting-o"></i></span><a href="#" class="color">{{article.comments}}</a></li>
+                        </ul>
+                        <p class="desc">{{ article.content | strip_html | truncate: 150 }}</p>
+                        
+                        <a href="{{ article.url}}" class="shop-button">{{block.settings.section_see_all}}</a>
+                      </div>
+                    </div>
+                  </div>
+                  {%endfor%}
+                  
+                </div>
+              </div>
+            </div>
+            {%endif%}
+            {%endfor%}
+            <!-- End Latest News -->
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+          {%for block in section.blocks%}
+          {%if block.type == "deal_product"%}
+          <div class="deal-product5">
+            <h2 class="title30 text-uppercase font-bold">{{block.settings.deal_title}}</h2>
+            {%for product in collections[block.settings.deal_collection].products limit:block.settings.deal_limit%}
+            {%include 'product-item-v10'%}
+            {%else%}
+            {%include 'product-item-v10-empty'%}
+            {%endfor%}
+            <!-- End Product -->
+          </div>
+          {%endif%}
+          {%endfor%}
+          <!-- End Deal Product -->
+        </div>
+      </div>
+    </div>
+     
+
+  </section>
+</div>
+
+{% schema %}
+
+  {
+    "name": "collection - blog",
+    "class" : "index-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      }
+     
+    ],
+    "blocks": [
+      {
+      "type": "featured_product",
+      "name": "featured product",
+      "limit": 1,
+      "settings": [
+    	{
+          "type": "text",
+          "id": "collection_title",
+          "label": "Title",
+          "default":"product"
+        },
+        
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select collection"
+        }
+      ]
+      },
+      {
+      "type": "deal_product",
+      "name": "Deal product",
+      "limit": 1,
+      "settings": [
+    	{
+          "type": "text",
+          "id": "deal_title",
+          "label": "Title",
+          "default":"Deal"
+        },
+        
+        {
+          "type": "collection",
+          "id": "deal_collection",
+          "label": "Select collection"
+        },
+       {
+          "type": "text",
+          "id": "deal_limit",
+          "label": "Limit",
+          "default":"6"
+        }
+      ]
+      },
+      {
+      "type": "banner",
+      "name": "banner",
+      "limit": 1,
+      "settings": [
+    	{
+          "type": "image_picker",
+          "id": "banner_image",
+          "label": "Banner"
+        },
+        {
+          "type": "text",
+          "id": "banner_text",
+          "label": "Banner",
+          "default":"Your Guide to Vegetarian Eating"
+        },
+        
+        {
+          "type": "url",
+          "id": "banner_url",
+          "label": "Url"
+        }
+      ]
+      },
+      {
+      "type": "blog",
+      "name": "blog",
+      "limit": 1,
+      "settings": [
+    	{
+          "type": "text",
+          "id": "blog_title",
+          "label": "Title",
+          "default":"product"
+        },
+        
+        {
+          "type": "blog",
+          "id": "blog_collection",
+          "label": "Select blog"
+        },
+        {
+          "type": "text",
+          "id": "blog_limit",
+          "label": "Limit",
+          "default":"6"
+        },
+        {
+        "type": "text",
+        "id": "section_see_all",
+        "label": "view more",
+        "default": "Read more"
+      }
+      ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Collection - blog",
+        "category": "Collection",
+        "blocks": [
+                {
+                "type": "featured_product"
+                },
+                {
+                "type": "banner"
+                },
+                {
+                "type": "blog"
+                },
+                {
+                "type": "deal_product"
+                }
+            ]
+      }
+    ]
+  }
+{% endschema %}

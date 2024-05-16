@@ -1,0 +1,95 @@
+
+
+<aside class="sidebar-left sidebar-blog">
+  <div class="widget widget-search">
+    <form class="search-form">
+      <input onblur="if (this.value=='') this.value = this.defaultValue" onfocus="if (this.value==this.defaultValue) this.value = ''" value="{{ 'general.search.placeholder' | t }}" type="text" name="q">
+      <input type="submit" value="">
+    </form>
+
+  </div>
+
+
+  {%if settings.sidebar_enable_category %}
+
+  <div class="widget widget-category">
+    <h2 class="title18 title-widget font-bold">{{settings.sidebar_category}}</h2>
+    <ul class="list-none wg-list-cat">
+      {% for link in linklists[settings.sidebar_category_menu].links %}
+      <li><a href="{{link.url}}">{{link.title}}</a></li>
+      {%endfor%}
+    </ul>
+  </div>
+
+
+  {%endif%}
+  <!-- End Widget -->
+
+  <!-- ENd Widget -->
+
+  {%if settings.sidebar_enable_recent_post%}
+
+  <div class="widget widget-popular-post">
+    <h2 class="title18 title-widget font-bold">{{settings.sidebar_recent_post}}</h2>
+    <div class="wg-product-slider wg-post-slider">
+      <div class="wrap-item group-navi" data-pagination="false" data-navigation="true" data-itemscustom="[[0,1],[560,2],[768,1]]">
+        <div class="item">
+          {% for article in blogs[settings.sidebar_blog].articles limit: 10%}
+          {%if forloop.index <= 5 %}
+          <div class="item-pop-post table">
+            <div class="post-thumb banner-adv overlay-image zoom-image">
+
+              <a href="{{ article.url}}" class="adv-thumb-link" ><img src="{{ article.image.src | img_url: 'grande' }}" alt=""></a>
+
+            </div>
+            <div class="post-info">
+              <h3 class="title14"><a href="{{article.url}}" class="black">{{article.title}}</a></h3>
+              <span class="silver">{{article.published_at | date: " %d %B , %Y " }}</span>
+            </div>
+          </div>
+          {%endif%}
+          {%endfor%}
+        </div>
+        <!-- End Item -->
+         {%if blogs[settings.sidebar_blog].articles_count <= 10 and blogs[settings.sidebar_blog].articles_count > 5 %}
+        <div class="item">
+          {% for article in blogs[settings.sidebar_blog].articles limit: 10 %}
+          {%if forloop.index <= 10 and forloop.index > 5 %}
+          <div class="item-pop-post table">
+            <div class="post-thumb banner-adv overlay-image zoom-image">
+
+              <a href="{{ article.url}}" class="adv-thumb-link" ><img src="{{ article.image.src | img_url: 'grande' }}" alt=""></a>
+
+            </div>
+            <div class="post-info">
+              <h3 class="title14"><a href="{{article.url}}" class="black">{{article.title}}</a></h3>
+              <span class="silver">{{article.published_at | date: " %d %B , %Y " }}</span>
+            </div>
+          </div>
+          {%endif%}
+          {%endfor%}
+
+        </div>
+        {%endif%}
+        <!-- End Item -->
+      </div>
+    </div>
+  </div>
+  {%endif%}
+
+  {%if settings.sidebar_enable_tags %}
+
+  <div class="widget widget-tags">
+    <h2 class="title18 title-widget font-bold">{{settings.sidebar_tags}}</h2>
+    <ul class="wg-list-tabs list-inline-block">
+      {% for tag in blog.all_tags %}
+
+      <li> {{ tag | link_to_tag: tag }}</li>
+
+      {% endfor %}
+    </ul>
+  </div>
+  {%endif%}
+
+  <!-- End Widget -->
+</aside>

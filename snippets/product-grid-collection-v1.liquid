@@ -1,0 +1,70 @@
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}	
+
+<div class="item-product item-product-grid text-center">
+  <div class="product-thumb">
+
+    <a href="{{ product.url | within: collection }}" class="product-thumb-link rotate-thumb">
+      <img src="{{ product.featured_image.src | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" >
+      {% for image in product.images %}
+      {% if forloop.last == true %}
+      <img src="{{ image.src | product_img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" >
+      {%endif%}
+      {% endfor %}
+    </a>
+
+  </div>
+  <div class="product-info">
+    <h3 class="product-title"><a href="{{ product.url | within: collection }}">{{product.title}}</a></h3>
+    <div class="product-price">
+      {% capture price %}{{ product.price | money }}{% endcapture %}
+      {% if on_sale %}
+      <del class="silver"><span>{{ product.compare_at_price | money }}</span></del>
+      {% endif %}
+
+
+      {% if product.price_varies %}
+      <ins class="color"><span>{{ 'products.general.from_text_html' | t: price: price }}</span></ins>
+      {% else %}
+      <ins class="color"><span>{{ price }}</span></ins>
+
+      {% endif %}
+
+
+    </div>
+    <div class="product-rate">
+      <div class="product-rating shopify-product-reviews-badge" data-id="{{ product.id }}"></div>
+    </div>
+    <div class="product-extra-link">
+      {%include 'add-wishlist'%}
+
+      {% if sold_out %}
+      <a class="addcart-link" href="{{ product.url | within: collection }}" title="sold out">
+        {{ settings.product_sold_out }}
+      </a>
+      {% else %}
+      {% if product.variants.size > 1 %}
+      <a class="addcart-link" href="{{ product.url | within: collection }}" title="{{settings.product_select_option_name }}">
+        {{ settings.product_select_option_name }}
+      </a>
+      {% else %}
+
+      <form method="post" action="/cart/add">
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+        <button type="submit" name="add" id="AddToCart{{ product.id }}" class="addcart-link add-to-cart-button enj-add-to-cart-btn" title="{{ settings.product_cart_name }}">
+          {{ settings.product_cart_name }}
+        </button>
+      </form>
+      {% endif %}
+      {% endif %}
+      <a href="javascript:void(0)"  class="compare-link quick-view engoj-btn-quickview"><i class="fa fa-search" aria-hidden="true"></i><span>{{ settings.product_quickview_name }}</span></a>
+    </div>
+  </div>
+</div>

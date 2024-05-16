@@ -1,0 +1,69 @@
+{% if template == 'index' %}
+  
+  {%if section.settings.footer_in_homepage =='footer_style1'%}
+  {% include 'footer-style1' %}
+  {%elsif section.settings.footer_in_homepage =='footer_style2'%}
+  {% include 'footer-style2' %}
+  {%elsif section.settings.footer_in_homepage =='footer_style3'%}
+  {% include 'footer-style3' %}
+  {%endif%}
+
+{%else%}
+
+  {%if section.settings.footer_in_orther_page =='footer_style1'%}
+  {% include 'footer-style1' %}
+  {%elsif section.settings.footer_in_orther_page =='footer_style2'%}
+  {% include 'footer-style2' %}
+  {%elsif section.settings.footer_in_orther_page =='footer_style3'%}
+  {% include 'footer-style3' %}
+  {%endif%}
+
+{%endif%}
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "select",
+        "id": "footer_in_homepage",
+        "label": "Footer in homepage",
+        "options": [
+          
+          {
+            "value": "footer_style1",
+            "label": "footer style 01"
+          },
+          {
+            "value": "footer_style2",
+            "label": "footer style 02"
+          },
+           {
+            "value": "footer_style3",
+            "label": "footer style 03"
+          }
+          
+        ]
+      },
+		{
+        "type": "select",
+        "id": "footer_in_orther_page",
+        "label": "footer in orther page",
+        "options": [
+          {
+            "value": "footer_style1",
+            "label": "footer style 01"
+          },
+          {
+            "value": "footer_style2",
+            "label": "footer style 02"
+          },
+           {
+            "value": "footer_style3",
+            "label": "footer style 03"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

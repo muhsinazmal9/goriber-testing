@@ -1,0 +1,137 @@
+
+
+<div data-section-id="{{ section.id }}" data-section-type="section-our-team" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="our-team">
+    <div class="fruit-farmer" style="{%if section.settings.section_background ==  blank %}background: #999999 url({{"bg-fruit.jpg"|asset_url}}){%else%}background: #999999 url({{section.settings.section_background |img_url:"master"}}){%endif%} no-repeat center top;">
+			<div class="container">
+				<div class="farm-slider banner-slider">
+					<div class="wrap-item group-navi" data-transition="fade" data-pagination="false" data-navigation="true" data-itemscustom="[[0,1]]">
+                      {%for block in section.blocks%}
+						<div class="item-farm item-slider">
+							<div class="farm-thumb banner-adv zoom-image fade-out-in animated" data-animated="bounceInLeft">
+                              <a href="{{block.settings.team_image_url}}" class="adv-thumb-link">
+                                {%if block.settings.team_image == blank %}
+                                <img src="{{"farm1.jpg"|asset_url}}" alt="" />
+                                {%else%}
+                                <img src="{{block.settings.team_image|img_url:"master"}}" alt="" />
+                                {%endif%}
+                              </a>
+							</div>
+							<div class="farm-info animated" data-animated="bounceInRight">
+								<h2 class="title18"><a href="{{block.settings.team_image_url}}" class="black">{{block.settings.team_name}}</a></h2>
+								<div class="farm-cat">
+									<a href="#" class="silver">{{block.settings.team_work}}</a>
+								</div>
+								<p class="desc">{{block.settings.team_content}}</p>
+								<div class="top-social">
+									{{block.settings.team_social}}
+								</div>
+							</div>
+						</div>
+                      {%endfor%}
+						
+					</div>
+				</div>
+			</div>
+		</div>
+    
+   
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "our team",
+  "class": "index-section",
+  "settings": [
+	 
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+          "type": "image_picker",
+          "id": "section_background",
+          "label": "Background"
+        }
+	  
+	
+  ],
+    "blocks": [
+      
+	  {
+      "type": "our_team",
+      "name": "Member",
+      "limit": 3,
+      "settings": [
+    	{
+          "type": "image_picker",
+          "id": "team_image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "team_image_url",
+          "label": "Url"
+        },
+        {
+          "type": "text",
+          "id": "team_name",
+          "label": "Name",
+		  "default":"Jonathan"
+        },
+        {
+          "type": "text",
+          "id": "team_work",
+          "label": "Work",
+		  "default":"sale"
+        },
+        {
+          "type": "textarea",
+          "id": "team_content",
+          "label": "Content",
+          "default":"Meet the maker of our bread – our fabulous baker boy alberto Trombin. He creates superb bread in their Melbourne-based bread-quarters."
+        },
+        {
+          "type": "textarea",
+          "id": "team_social",
+          "label": "Content",
+          "default":"<a href=\"#\"><i class=\"fa fa-facebook\"></i><\/a><a href=\"#\"><i class=\"fa fa-twitter\"></i><\/a><a href=\"#\"><i class=\"fa fa-instagram\"></i><\/a><a href=\"#\"><i class=\"fa fa-google-plus\"></i><\/a>"
+        }
+      ]
+      }
+	
+
+    ],
+
+ 
+  "presets": [{
+    "name": "our team",
+    "category": "Our team",
+        "blocks": [
+                {
+                "type": "our_team"
+                },
+                {
+                "type": "our_team"
+                },
+                {
+                "type": "our_team"
+                }
+            ]
+   
+  }]
+}
+{% endschema %}

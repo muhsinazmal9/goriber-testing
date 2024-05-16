@@ -1,0 +1,135 @@
+<!-- /snippets/breadcrumb.liquid -->
+{% comment %}
+Documentation - http://docs.shopify.com/support/your-website/navigation/creating-a-breadcrumb-navigation
+{% endcomment %}
+
+
+
+
+<!-- /snippets/breadcrumb.liquid -->
+{% comment %}
+Documentation - http://docs.shopify.com/support/your-website/navigation/creating-a-breadcrumb-navigation
+{% endcomment %}
+{% unless template == 'index' %}
+
+
+<div class="shop-banner banner-adv line-scale zoom-image">
+  <a href="#" class="adv-thumb-link">
+    
+    {% if template contains 'collection' and collection.handle %}
+    {% capture _image_1 %}breadcrumb_image_1.jpg{% endcapture %}
+    <img src="{{_image_1|asset_url}}" alt="Banner-header">
+    {% elsif  template contains 'product' %}
+    {% capture _image_2 %}breadcrumb_image_2.jpg{% endcapture %}
+    <img src="{{_image_2|asset_url}}" alt="Banner-header">
+    {% elsif template == 'cart' %}
+    {% capture _image_3 %}breadcrumb_image_3.jpg{% endcapture %}
+    <img src="{{_image_3|asset_url}}" alt="Banner-header">
+    {% elsif template == 'blog' %}
+    {% capture _image_4 %}breadcrumb_image_4.jpg{% endcapture %}
+    <img src="{{_image_4|asset_url}}" alt="Banner-header">
+    {% elsif template contains 'page' %}
+    {% capture _image_5 %}breadcrumb_image_5.jpg{% endcapture %}
+    <img src="{{_image_5|asset_url}}" alt="Banner-header">
+    {% else %}
+    {% capture _image_6 %}breadcrumb_image_6.jpg{% endcapture %}
+    <img src="{{_image_6|asset_url}}" alt="Banner-header">
+    {% endif %}
+  
+ 
+  </a>
+  <div class="banner-info">
+    <h2 class="title30 color">
+      {% if template contains 'product' %}
+        {{ product.title }}
+        {% elsif template contains 'collection' and collection.handle %}
+        {{ collection.title }}
+        {% elsif template == 'blog' %}
+        {{ blog.title }}
+        {% elsif template == 'article' %}
+        {{ article.title }}
+        {% elsif template contains 'page' %}
+        {{ page.title }}
+        {% else %}
+        {{ page_title }}
+        {% endif %}
+    </h2>
+    <div class="bread-crumb white">
+     
+    <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}" class="white">{{ 'general.breadcrumbs.home' | t }}</a>
+     {% if template contains 'product' %}
+
+        {% if collection %}
+        
+        {% if collection.handle %}
+      <span>
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+      </span>
+        {% endif %}
+        {% endif %}
+      
+      <span>
+        
+        {{ product.title }}
+      </span>
+        {% elsif template contains 'collection' and collection.handle %}
+
+      
+        {% if current_tags %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      <span>
+        {{ collection.title | link_to: url }}
+      </span>
+       <span>
+        {{ current_tags | join: " + " }}
+      </span>
+        {% else %}
+      <span>
+        {{ collection.title }}
+      </span>
+        {% endif %}
+        {% elsif template == 'blog' %}
+
+        
+        {% if current_tags %}
+      <span>
+        {{ blog.title | link_to: blog.url }}
+      </span>
+       <span>
+        {{ current_tags | join: " + " }}
+      </span>
+        {% else %}
+      <span>
+        {{ blog.title }}
+      </span>
+        {% endif %}
+        {% elsif template == 'article' %}
+
+       <span>
+        {{ blog.title | link_to: blog.url }}
+          </span>
+        <span>
+        {{ article.title }}
+          </span>
+
+        {% elsif template contains 'page' %}
+
+        <span>
+        {{ page.title }}
+      </span>
+
+        {% else %}
+
+        <span>
+        {{ page_title }}
+      </span>
+
+        {% endif %}
+    </div>
+  </div>
+</div>
+
+
+
+{% endunless %}

@@ -1,0 +1,107 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="section-newsletter-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section >
+
+    <div class="newsletter-box bg-color" style="background-color:{{section.settings.newsletter_color}}">
+			<div class="container">
+				<ul class="inner-newsletter white list-inline-block">
+					<li><h2 class="title30" style="color:{{section.settings.newsletter_text_color}}"><i class="fa fa-envelope-open"></i>{{section.settings.newsletter_title}}</h2></li>
+					<li><p style="color:{{section.settings.newsletter_text_color}}">{{section.settings.newsletter_text}}</p></li>
+					<li>
+                      
+                      {% if settings.newsletter_form_action != blank %}
+                      {% assign form_action = settings.newsletter_form_action %}
+                      {% else %}
+                      {% assign form_action = '#' %}
+                      {% endif %}
+
+ 
+						<form class="email-form" action="{{ form_action }}" method="post">
+							<input style="border: 2px solid {{section.settings.newsletter_border_color}};" onblur="if (this.value=='') this.value = this.defaultValue" onfocus="if (this.value==this.defaultValue) this.value = ''" value="{{section.settings.newsletter_placehoder}}" type="text" name="EMAIL" id="mail">
+							<input type="submit" value="{{section.settings.newsletter_button}}" style="background:{{section.settings.newsletter_button_color}}"/>
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Section newsletter v1",
+  "class": "index-section",
+  "settings": [
+	 
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "color",
+        "id": "newsletter_color",
+        "label": "background color"
+      },
+      {
+        "type": "color",
+        "id": "newsletter_text_color",
+        "label": "Text color"
+      },
+      {
+        "type": "color",
+        "id": "newsletter_border_color",
+        "label": "border input"
+      },
+      {
+        "type": "color",
+        "id": "newsletter_button_color",
+        "label": "button color"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_title",
+        "label": "Title",
+        "default":"Newsletter"
+      },
+      {
+        "type": "textarea",
+        "id": "newsletter_text",
+        "label": "Text",
+        "default":"Sign up for Kelis tips, news and advice"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_placehoder",
+        "label": "Text placehoder",
+        "default":"Email"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_button",
+        "label": "Text Button",
+        "default":"Sign up"
+      }
+
+  ],
+  
+
+  "presets": [{
+    "name": "Newsletter v1",
+    "category": "Newsletter"
+        
+   
+  }]
+}
+{% endschema %}

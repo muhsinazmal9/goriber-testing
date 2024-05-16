@@ -1,0 +1,115 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="section-testimonial-v3" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="testimonial-v3">
+    
+    <div class="client-review8 box-parallax"  style="  {%if section.settings.testimonial_background == blank%}  background-image: url({{"prl2.jpg"|asset_url}}){%else%}background-image: url({{section.settings.testimonial_background|img_url:"master"}}){%endif%};">
+			<div class="container">
+				<h2 class="title30 font-bold text-center white">{{section.settings.testimonial_title}}</h2>
+				<div class="client-slider8">
+					<div class="wrap-item" data-itemscustom="[[0,1]]">
+                        {% for block in section.blocks%}
+						<div class="item-client8 text-center">
+							<p class="desc white">{{block.settings.testimonial}}</p>
+							<h3 class="title18"><a href="#" class="white">{{block.settings.testimonial_name}}</a></h3>
+							<span class="color">{{block.settings.testimonial_work}}</span>
+						</div>
+                      {%endfor%}
+					</div>
+				</div>
+			</div>
+		</div>	
+ 
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Section testimonial v3",
+  "class": "index-section",
+  "settings": [
+	 
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+	  {
+        "type": "header",
+        "content": "Title"
+      },
+      {
+        "type": "text",
+        "id": "testimonial_title",
+        "label": "Tilte",
+        "default":"What People Say"
+      },
+      
+      {
+          "type": "image_picker",
+          "id": "testimonial_background",
+          "label": "Background"
+        }
+		
+	  
+      
+  ],
+    "blocks": [
+      
+	  {
+      "type": "testimonial",
+      "name": "testimonial",
+      "settings": [
+    	
+		{
+          "type": "textarea",
+          "id": "testimonial",
+          "label": "testimonial",
+		  "default":"I rarely write reviews for products but with the EngoCreative, I am more than grateful. The site is fully customizable and you can really feel like playing while designing the site! Thanks again for having made such a convenient, yet fully-functional theme."
+        },
+        {
+          "type": "text",
+          "id": "testimonial_name",
+          "label": "Name",
+		  "default":"ONATHAN VANCE"
+        },
+        {
+          "type": "text",
+          "id": "testimonial_work",
+          "label": "Work",
+		  "default":"CEO & Founder"
+        }
+      ]
+      }
+	
+    ],
+
+ 
+  "presets": [{
+    "name": "testimonial v3",
+    "category": "testimonial",
+        "blocks": [
+                {
+                "type": "testimonial"
+                },
+                {
+                "type": "testimonial"
+                },
+                {
+                "type": "testimonial"
+                }
+            ]
+   
+  }]
+}
+{% endschema %}

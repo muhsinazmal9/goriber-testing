@@ -1,0 +1,28 @@
+
+
+<div class="popup-content-wrapper">
+       <div class="popup-container">
+         <div  id="boxes">
+         <div class="window" id="dialog">
+         <div class="window-popup text-center" style="background: url({{'popup_image.jpg' | asset_url}});background-size: 100% 100%;"> 
+				<a href="javascript:void(0)" class="close-popup mfp-close"><i class="fa fa-times " aria-hidden="true"></i></a>
+				<div class="content-popup">
+					<h2 class="title30 text-uppercase white">{{settings.popup_newletter_title}}</h2>
+                  {% if settings.newsletter_form_action != blank %}
+                {% assign form_action = settings.newsletter_form_action %}
+                {% else %}
+                {% assign form_action = '#' %}
+                {% endif %}
+					<form action="{{ form_action }}"  method="post">
+             
+                             <input type="text" value="{% if customer %}{{ customer.email }}{% endif %}"  placeholder="{{settings.popup_newletter_input_title}}" name="EMAIL" id="mail" class="validate[required,custom[email]]" >
+                       <input type="submit" class="shop-button title18 text-uppercase" value="{{settings.popup_newletter_button_title}}"/>
+					</form>
+				</div>
+			</div>
+         </div>
+         </div>
+
+       </div>
+    </div>
+

@@ -1,0 +1,86 @@
+<footer id="footer">
+		<div class="footer2 box-parallax" style="background-position: center bottom;
+    background-image: url({%if settings.f2_footer_bg != blank %}{{settings.f2_footer_bg|img_url:"master"}}{%else%}{{'prl3.jpg'|asset_url}}{%endif%});">
+			<div class="container">
+				<div class="main-footer2">
+					<div class="row">
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<div class="footer-box2">
+								<h2 class="title18 font-bold color">{{settings.f2_about_title}}</h2>
+								<p class="desc white">{{settings.f2_about_subtitle}} </p>
+							</div>
+                          {%if settings. f2_payment_enable%}
+                      
+							<div class="footer-box2 payment-method">
+								<h2 class="title18 font-bold color">{{settings.f2_payment_title}}</h2>
+								{%include "payment-footer"%}
+							</div>	
+                          {%endif%}
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<div class="footer-box2">
+								<h2 class="title18 font-bold color">{{settings.f2_contact_title}}</h2>
+								<div class="contact-footer2">
+                                  {%if settings.f2_contact_address%}
+									<p class="desc white"><span class="color"><i class="fa fa-map-marker" aria-hidden="true"></i></span>{{settings.f2_contact_address}}</p>
+									{%endif%}
+                                  {%if settings.f2_contact_phone%}
+                                  <p class="desc white"><span class="color"><i class="fa fa-phone" aria-hidden="true"></i></span>{{settings.f2_contact_phone}}</p>
+									{%endif%}
+                                  {%if settings.f2_contact_email%}
+                                  <p class="desc white"><span class="color"><i class="fa fa-envelope" aria-hidden="true"></i></span><a href="{{settings.f2_contact_email}}" class="white">{{settings.f2_contact_address}}</a></p>
+								{%endif%}
+                              </div>
+                              
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<div class="footer-box2">
+								<h2 class="title18 font-bold color">{{settings.f2_newsletter_title}}</h2>
+								<p class="white">{{settings.f2_newsletter_subtitle}}</p>
+								
+                              
+                           
+                      
+                      {% if settings.newsletter_form_action != blank %}
+                      {% assign form_action = settings.newsletter_form_action %}
+                      {% else %}
+                      {% assign form_action = '#' %}
+                      {% endif %}
+
+ 
+						<form class="email-form2" action="{{ form_action }}" method="post">
+							<input onblur="if (this.value=='') this.value = this.defaultValue" onfocus="if (this.value==this.defaultValue) this.value = ''" value="{{section.settings.newsletter_placehoder}}" type="text" name="EMAIL" id="mail">
+							<input type="submit" value="{{settings.f2_newsletter_textbutton}}" />
+						</form>
+					
+							</div>
+                           {%if settings.f2_payment_enable%}
+							<div class="social-network footer-box2">
+								<h2 class="title18 font-bold color">{{settings.f2_social_title}}</h2>
+							
+                               {%include "social_footer"%}
+							</div>
+                          {%endif%}
+						</div>
+					</div>
+				</div>
+				<!-- End Main Footer -->
+				<div class="logo-footer2 text-center">
+					<a href="{{shop.url}}" class="pulse">
+                      {%if settings.f2_footer_logo != blank %}<img src="{{settings.f2_footer_logo|img_url:'medium'}}" alt="" />{%else%}{%endif%}
+                  </a>
+				</div>
+				<div class="bottom-footer2 text-center">
+					<ul class="menu-footer2 list-inline-block">
+						
+                      {%for link in linklists[settings.f2_footer_menu].links %}
+                                <li><a class="white" href="{{link.url}}" title="{{link.title}}">{{link.title}}</a></li>
+                              {%endfor%}
+					</ul>
+					<p class="copyright2 desc white">{{settings.f2_copyright}}</p>
+					<p class="design2 desc white">{{settings.f2_copyright_text}}</p>
+				</div>
+			</div>
+		</div>
+	</footer>

@@ -1,0 +1,130 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="section-testimonial-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="testimonial-v1">
+    <div class="client-say2 text-center box-parallax" style="  {%if section.settings.testimonial_background == blank%}  background-image: url({{"prl2.jpg"|asset_url}}){%else%}background-image: url({{section.settings.testimonial_background|img_url:"master"}}){%endif%};">
+      <div class="container">
+        <h2 class="title30 paci-font color">{{section.settings.testimonial_title}}</h2>
+        <h2 class="title30 text-uppercase font-bold white">{{section.settings.testimonial_subtitle}}</h2>
+        <div class="client-slider2">
+          <div class="wrap-item" data-transition="fade" data-pagination="false" data-navigation="true" data-itemscustom="[[0,1]]">
+             {% for block in section.blocks%}
+            <div class="item-client2">
+              <div class="client-thumb">
+                <a href="#"><img {%if block.settings.testimonial_image == blank%} src="{{'av2.png'| asset_url }}"  {%else%} src="{{block.settings.testimonial_image|img_url:'small'}}"  {%endif%} alt="" /></a>
+						  </div>
+              <div class="client-info">
+                <h3 class="title18"><a href="#" class="color">{{block.settings.testimonial_name}}</a></h3>
+                <span class="white">{{block.settings.testimonial_work}}</span>
+                <p class="desc white">{{block.settings.testimonial}}</p>
+              </div>
+            </div>
+           {%endfor%}
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Section testimonial v2",
+  "class": "index-section",
+  "settings": [
+	 
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+	  {
+        "type": "header",
+        "content": "Title"
+      },
+      {
+        "type": "text",
+        "id": "testimonial_title",
+        "label": "Tilte",
+        "default":"What People Say"
+      },
+       {
+        "type": "text",
+        "id": "testimonial_subtitle",
+        "label": "Sub Tilte",
+        "default":"FRUIT STORE"
+      },
+      {
+          "type": "image_picker",
+          "id": "testimonial_background",
+          "label": "Background"
+        }
+		
+	  
+      
+  ],
+    "blocks": [
+      
+	  {
+      "type": "testimonial",
+      "name": "testimonial",
+      "settings": [
+    	{
+          "type": "image_picker",
+          "id": "testimonial_image",
+          "label": "Icon"
+        },
+		{
+          "type": "textarea",
+          "id": "testimonial",
+          "label": "testimonial",
+		  "default":"I rarely write reviews for products but with the EngoCreative, I am more than grateful. The site is fully customizable and you can really feel like playing while designing the site! Thanks again for having made such a convenient, yet fully-functional theme."
+        },
+        {
+          "type": "text",
+          "id": "testimonial_name",
+          "label": "Name",
+		  "default":"ONATHAN VANCE"
+        },
+        {
+          "type": "text",
+          "id": "testimonial_work",
+          "label": "Work",
+		  "default":"CEO & Founder"
+        }
+      ]
+      }
+	
+
+    ],
+
+ 
+  "presets": [{
+    "name": "testimonial v2",
+    "category": "testimonial",
+        "blocks": [
+                {
+                "type": "testimonial"
+                },
+                {
+                "type": "testimonial"
+                },
+                {
+                "type": "testimonial"
+                }
+            ]
+   
+  }]
+}
+{% endschema %}

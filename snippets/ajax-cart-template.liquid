@@ -1,0 +1,91 @@
+<!-- /snippets/ajax-cart-template.liquid -->
+{% comment %}
+
+  This snippet provides the default handlebars.js templates for
+  the ajax cart plugin. Use the raw liquid tags to keep the
+  handlebar.js template tags as available hooks.
+
+
+
+{% endcomment %}
+<script id="CartTemplate" type="text/template">
+  {% raw %}
+    <form action="/cart" method="post" novalidate class="ajaxcart">
+    
+  
+  <div class="list-mini-cart-item">
+     {{#items}}
+    <div class="product-mini-cart table">
+      <div class="product-thumb">
+        <a href="{{url}}" class="product-thumb-link"><img alt="" src="{{img}}"></a>
+     
+      </div>
+      <div class="product-info">
+        <h3 class="product-title"><a href="{{url}}">{{name}}</a>
+           {{#if variation}}
+                    <span class="ajaxcart__product-meta">{{variation}}</span>
+                  {{/if}}
+                  {{#properties}}
+                    {{#each this}}
+                      {{#if this}}
+                        <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
+                      {{/if}}
+                    {{/each}}
+                  {{/properties}}
+       </h3>
+        <div class="product-price">
+          <ins><span>{{{price}}}</span></ins>
+         
+        </div>
+        <p class="qty">{% endraw %}{{ 'cart.label.quantity' | t }}{% raw %}: {{itemQty}}</p>
+      </div>
+    </div>
+      {{/items}}
+  </div>
+  <div class="mini-cart-total  clearfix">
+    <strong class="pull-left title18">{% endraw %}{{ 'minicart.general.total_price' | t }}{% raw %}</strong>
+    <span class="pull-right color title18">{{{totalPrice}}}</span>
+  </div>
+  <div class="mini-cart-button">
+    <a class="mini-cart-view shop-button" href="/cart">{% endraw %}{{ 'minicart.general.view_cart' | t }}{% raw %} </a>
+    <a class="mini-cart-checkout shop-button" href="/checkout">{% endraw %}{{ 'minicart.general.checkout' | t }}{% raw %}</a>
+  </div>
+    
+   
+      
+     </form>   
+  {% endraw %}
+  </script>
+  <script id="AjaxQty" type="text/template">
+  {% raw %}
+    <div class="ajaxcart__qty">
+      <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus icon-fallback-text" data-id="{{id}}" data-qty="{{itemMinus}}">
+        <span class="icon icon-minus" aria-hidden="true"></span>
+        <span class="fallback-text">&minus;</span>
+      </button>
+      <input type="text" class="ajaxcart__qty-num" value="{{itemQty}}" min="0" data-id="{{id}}" aria-label="quantity" pattern="[0-9]*">
+      <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus icon-fallback-text" data-id="{{id}}" data-qty="{{itemAdd}}">
+        <span class="icon icon-plus" aria-hidden="true"></span>
+        <span class="fallback-text">+</span>
+      </button>
+    </div>
+  {% endraw %}
+  </script>
+  <script id="JsQty" type="text/template">
+  {% raw %}
+    <div class="js-qty">
+   
+                                                    
+                                                    
+      <button type="button" class="js-qty__adjust js-qty__adjust--minus icon-fallback-text  silver" data-id="{{id}}" data-qty="{{itemMinus}}">
+        <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+        <span class="fallback-text">&minus;</span>
+      </button>
+      <input type="text" class="js-qty__num" value="{{itemQty}}" min="1" data-id="{{id}}" aria-label="quantity" pattern="[0-9]*" name="{{inputName}}" id="{{inputId}}">
+      <button type="button" class="js-qty__adjust js-qty__adjust--plus icon-fallback-text silver" data-id="{{id}}" data-qty="{{itemAdd}}">
+        <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+       
+      </button>
+    </div>
+  {% endraw %}
+  </script>

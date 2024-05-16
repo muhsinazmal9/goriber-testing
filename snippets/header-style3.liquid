@@ -1,0 +1,108 @@
+<header id="header">
+  <div class="header header-v3">
+    <div class="top-header bg-color top-header2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-4 hidden-xs">
+            	
+            <ul class="currency-language list-inline-block pull-left">
+              {%if settings.language_enable%}
+              <li>
+                <div class="language-box">
+                  <a href="#" class="language-current white"><img src="{{"language_default_image.png"|asset_url}}" alt=""><span>{{settings.language_default}}</span></a>
+                  <ul class="language-list list-none">
+                    {%for i in (1..6)%}
+                    {%capture _enable%}language{{i}}_enable{%endcapture%}
+                    {%capture _text%}language{{i}}_text{%endcapture%}
+                    {%capture _url%}Language{{i}}_url{%endcapture%}
+                    {%capture _img%}language{{i}}_image.png{%endcapture%}
+
+                    {%assign enable = settings[_enable]%}
+                    {%assign text = settings[_text]%}
+                    {%assign url = settings[_url]%}
+                    {%if enable%}
+                    <li><a href="{{url}}" ><img src="{{_img|asset_url}}" alt=""><span>{{text}}</span></a></li>
+                    {%endif%}
+                    {% endfor %}
+
+                  </ul>
+                </div>
+              </li>
+              {%endif%}
+              {%if settings.currency_enable%}
+              <li>
+                <div class="currency-box">
+                  <a href="#" class="currency-current white selected-currency"><span>{{shop.currency}}</span></a>
+                  <ul id="currencies" class="currency-list list-none">
+
+                    {% assign supported = settings.supported_currencies | split: ' ' %}
+                    {% for c in supported %}
+                    <li><a data-currency="{{c}}">{{c}}</a></li>
+                    {% endfor %}
+
+                  </ul>
+                </div>
+              </li>
+              {%endif%}
+            </ul>
+
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-12">
+            <ul class="info-account list-inline-block pull-right">
+              {% if customer %}
+              <li><a href="/account" class="white"><span ><i class="fa fa-user-o"></i></span>{{ customer.name }}</a></li>
+              <li><a href="/account/logout" class="white"><span ><i class="fa fa-key"></i></span>{{ 'layout.customer.log_out' | t}}</a></li>
+              <li><a href="/pages/wish-list" class="white"><span ><i class="fa fa-heat"></i></span>{{ 'layout.customer.wishlist' | t}}</a></li>
+
+              {% else %}
+              <li><a href="/account/login" class="white"><span ><i class="fa fa-user-o"></i></span>{{ 'layout.customer.log_in' | t }}</a></li>
+              <li><a href="/account/register" class="white"><span><i class="fa fa-key"></i></span>{{ 'layout.customer.create_account' | t}}</a></li>
+              {%endif%}
+             
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Top Header -->
+    <div class="main-header3 bg-white header-ontop">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="logo logo3 pull-left">
+              <h1 class="hidden">{{shop.name}}</h1>
+              <a href="{{shop.url}}"><img src="{{'h3_logo1.png'|asset_url}}" alt="" style="max-width:{{settings.h3_logo1_max_width}}px"/></a>			
+            </div>
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <nav class="main-nav main-nav3 pull-left">
+              {%include 'menu'%}
+              <a href="#" class="toggle-mobile-menu"><span></span></a>
+            </nav>
+            <ul class="list-inline-block pull-right search-cart3">
+              <li>
+                <form class="search-form search-form3 pull-right" method="get" action="/search" role="search">
+                  <input type="hidden" name="type" value="product">
+                  <input onblur="if (this.value=='') this.value = this.defaultValue" onfocus="if (this.value==this.defaultValue) this.value = ''" value="{{ 'general.search.placeholder' | t }}" type="text" name="q" >
+                  <input type="submit" value="" />
+                </form>
+             
+              </li>
+              <li>
+                <div class="mini-cart-box mini-cart3 pull-right">
+                  <a class="mini-cart-link" href="/cart">
+                    <span class="mini-cart-icon title18 color2"><i class="fa fa-shopping-basket"></i></span>
+                    <span class="mini-cart-number bg-color white CartCount" >{{ cart.item_count }}</span>
+                  </a>
+                {% include "mini-cart" %}
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Main Header -->
+  </div>
+</header>
+

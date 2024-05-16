@@ -1,0 +1,99 @@
+
+
+<div data-section-id="{{ section.id }}" data-section-type="section-blog-v5" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="blog-v2">
+    <div class="container">
+<div class="from-blog8">
+				<h2 class="title30 font-bold text-center">{{section.settings.section_title}}</h2>
+				<div class="blog-slider8">
+					<div class="wrap-item" data-pagination="false" data-navigation="true" data-itemscustom="[[0,1],[640,2],[990,3]]">
+                      {% for article in blogs[section.settings.select_blog].articles limit: section.settings.blog_limit %}
+						<div class="item-blog2 bg-white drop-shadow">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="banner-adv zoom-image overlay-image">
+										<a href="{{article.url}}" class="adv-thumb-link"><img src="{{ article.image.src | img_url: 'large' }}" alt="" /></a>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="blog-info2 text-center info-center">
+										<h2 class="title18"><a href="{{ article.url}}" class="black">{{article.title}}</a></h2>
+										<ul class="list-inline-block post-comment-date">
+											<li><span class="color"><i class="fa fa-calendar-o"></i>{{article.published_at | date: " %d %B , %Y " }}</span></li>
+                      <li><span class="color"><i class="fa fa-commenting-o"></i></span><a href="#" class="color">{{article.comments}}</a></li>
+										</ul>
+										<p class="desc">{{ article.content | strip_html | truncate: 150 }}</p>
+                    <a href="{{ article.url}}" class="shop-button">{{section.settings.section_see_all}}</a>
+									</div>
+								</div>
+							</div>
+						</div>
+                      {%endfor%}
+						
+					</div>
+				</div>
+			</div>
+    
+    </div>
+
+  </section>
+</div>
+
+{% schema %}
+
+  {
+    "name": "Blog v5",
+    "class" : "index-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "section_title",
+        "label": "Title",
+        "default": "Lastest From Blog"
+      },
+      {
+        "type": "blog",
+        "id": "select_blog",
+        "label": "Select blog"
+      },
+     {
+        "type": "text",
+        "id": "blog_limit",
+        "label": "Select blog",
+        "default":"6"
+      },
+	  {
+        "type": "text",
+        "id": "section_see_all",
+        "label": "view more",
+        "default": "Read more"
+      }
+	  
+	  
+      
+    ],
+   
+    "presets": [
+      {
+        "name": "Blog v5",
+        "category": "Blog"
+      }
+    ]
+  }
+{% endschema %}

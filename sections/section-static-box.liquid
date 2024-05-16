@@ -1,0 +1,106 @@
+
+
+<div data-section-id="{{ section.id }}" data-section-type="section-instagram" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="instagram">
+    <div class="container">
+         <div class="statistic-box" {%if section.settings.box_background != blank %}style="background:{{section.settings.box_background}};"{%endif%}>
+				<h2 class="title30 font-bold text-center border-bottom">{{section.settings.box_title}}</h2>
+				<div class="list-statistic">
+					<div class="row">
+                      {%for block in section.blocks%}
+						<div class="col-md-3 col-sm-6 col-xs-6">
+							<div class="item-rotate-number text-center text-uppercase font-bold">
+								<div class="rotate-number numscroller style1">{{block.settings.box_number}}</div>
+								<h2 class="title14">{{block.settings.box_text}}</h2>
+							</div>
+						</div>
+                      {%endfor%}
+						
+					</div>
+				</div>
+			</div>
+      
+     
+      
+		</div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Section static box v1",
+  "class": "index-section",
+  "settings": [
+	 
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+     {
+        "type": "text",
+        "id": "box_title",
+        "label": "Title",
+        "default": "Statistic Box"
+      },
+      {
+        "type": "color",
+        "id": "box_backgtound",
+        "label": "Title"
+      }
+  ],
+  "blocks": [
+    {
+      "type": "Box",
+      "name": "box",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "box_number",
+          "label": "Number",
+		  "default":"400"
+        },
+        {
+          "type": "text",
+          "id": "box_text",
+          "label": "Text",
+          "default":"SUCCESSFULL TRANSPLANT"
+        }
+	
+      ]
+    }
+	
+  ],
+  "presets": [{
+    "name": "static box",
+    "category": "Static box ",
+    "blocks": [
+      {
+        "type": "Box"
+      },
+	  {
+        "type": "Box"
+      },
+	  {
+        "type": "Box"
+      },
+	  {
+        "type": "Box"
+      }
+    ]
+  }]
+}
+{% endschema %}
+

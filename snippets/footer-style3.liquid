@@ -1,0 +1,66 @@
+<footer id="footer">
+		<div class="footer3">
+			<div class="footer-top3">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<div class="footer-box3">
+								<h2 class="title30 font-bold">{{settings.f2_social_title}}</h2>
+								<div class="social-network">
+									 {%include "social_footer"%}
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<div class="footer-box3">
+								<h2 class="title30 font-bold">{{settings.f3_contact_title}}</h2>
+								<p class="desc">{{settings.f3_contact_text1}}</p>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12">
+							<p class="desc more-contact3">{{settings.f3_contact_text2}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Footer Top -->
+			<div class="footer-bottom3">
+				<div class="container">
+                  {%if settings.f3_brand_enable %}
+					<div class="brand-slider brand-slider3">
+						<div class="wrap-item" data-pagination="false" data-autoplay="true" data-itemscustom="[[0,2],[480,3],[768,4],[990,5]]">
+                          {%for i in (1..8) %}
+                          {%capture image %}f3_brand_image{{i}}{%endcapture%}
+                          {%capture url %}f3_brand_url{{i}}{%endcapture%}
+                          {%if settings[image] != blank %}
+							<div class="item-brand">
+								<a href="{{settings[url]}}" class="pulse-grow"><img src="{{settings[image]|img_url:"medium"}}" alt="" /></a>
+							</div>
+                          {%endif%}
+                          {%endfor%}
+							
+						</div>
+					</div>
+                  {%endif%}
+					<!-- End List Brand -->
+					<div class="policy-payment3">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<ul class="text-left text-uppercase list-inline-block term-policy">
+									 {%for link in linklists[settings.f3_footer_menu].links %}
+                                <li><a class="color" href="{{link.url}}" title="{{link.title}}">{{link.title}}</a></li>
+                              {%endfor%}
+								</ul>
+								<p class="desc copyright3">{{settings.f3_copyright}}</p>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="payment-method text-right">
+									{%include "payment-footer"%}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>

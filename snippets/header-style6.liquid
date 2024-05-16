@@ -1,0 +1,61 @@
+<header id="header">
+		<div class="top-header8 header-v6">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5 col-sm-5 col-xs-12">
+						<div class="logo logo8">
+							<h1 class="hidden">{{shop.name}}</h1>
+								<a href="{{shop.url}}"><img src="{{'h6_logo1.png'|asset_url}}" alt="" style="max-width:{{settings.h6_logo1_max_width}}px"/></a>
+						
+						</div>
+					</div>
+					<div class="col-md-7 col-sm-7 hidden-xs">
+						<ul class="info-account list-inline-block pull-right">
+						
+                          {% if customer %}
+                              <li><a href="/account" class="smoke"><span ><i class="fa fa-user-o"></i></span>{{ customer.name }}</a></li>
+                              <li><a href="/account/logout" class="smoke"><span><i class="fa fa-key"></i></span>{{ 'layout.customer.log_out' | t}}</a></li>
+                              <li><a href="/pages/wish-list" class="smoke"><span ><i class="fa fa-heat"></i></span>{{ 'layout.customer.wishlist' | t}}</a></li>
+
+                              {% else %}
+                              <li><a href="/account/login" class="smoke"><span><i class="fa fa-user-o"></i></span>{{ 'layout.customer.log_in' | t }}</a></li>
+                              <li><a href="/account/register" class="smoke"><span><i class="fa fa-key"></i></span>{{ 'layout.customer.create_account' | t}}</a></li>
+                              {%endif%}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Top Header -->
+		<div class="main-header8">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<nav class="main-nav main-nav8 pull-left">
+							{%include 'menu'%}
+							<a href="#" class="toggle-mobile-menu"><span></span></a>
+						</nav>
+						<ul class="list-inline-block pull-right search-cart3">
+							<li>
+								<form class="search-form search-form3 pull-right" method="get" action="/search" role="search">
+									 <input type="hidden" name="type" value="product">
+                              <input onblur="if (this.value=='') this.value = this.defaultValue" onfocus="if (this.value==this.defaultValue) this.value = ''" value="{{ 'general.search.placeholder' | t }}" type="text" name="q" >
+                              <input type="submit" value="" />
+								</form>
+							</li>
+							<li>
+								<div class="mini-cart-box mini-cart3 pull-right">
+									<a class="mini-cart-link bg-color" href="/cart">
+										<span class="mini-cart-icon title18 white"><i class="fa fa-shopping-basket"></i></span>
+										<span class="mini-cart-number bg-color2 white CartCount">{{ cart.item_count }}</span>
+									</a>
+									{% include "mini-cart" %}
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Main Header -->
+	</header>

@@ -1,0 +1,106 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="section-product-deals-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="product-deals-v2">
+
+      <div class="deal-box2">
+        <div class="title-deal-box2 white bg-color">
+          <h2 class="title30 paci-font">{{section.settings.collection_title}}</h2>
+          <h2 class="title30 text-uppercase font-bold">{{section.settings.collection_subtitle}}</h2>
+        </div>
+        <div class="deal-product2">
+          <div class="container">
+            <div class="deal-slider2 product-slider">
+              <div class="wrap-item" data-pagination="false" data-navigation="true" data-itemscustom="[[0,1],[560,2],[990,3]]">
+                {%for product in collections[section.settings.collection_product].products limit:section.settings.collection_product_limit%}
+                {%include 'product-item-v4'%}
+                {%else%}
+                {%include 'product-item-v4-empty'%}
+                {%endfor%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="deal-countdown2">
+          <h2 class="title18 color">{{section.settings.collection_product_text}}</h2>
+          <div class="days-countdown" data-date="{{section.settings.collection_product_time}}"></div>
+        </div>
+      </div>
+
+
+
+  </section>
+</div>
+
+{% schema %}
+
+  {
+    "name": "Product Deals v2",
+    "class" : "index-section",
+    "settings": [
+	  
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "collection_title",
+        "label": "Title",
+        "default": "Deals of the Month"
+      },
+      {
+        "type": "text",
+        "id": "collection_subtitle",
+        "label": "Sub Title",
+        "default": "TOP 10 ITEMS"
+      },
+      
+      {
+        "type": "collection",
+        "id": "collection_product",
+        "label": "Select collection"
+      },
+      {
+        "type": "text",
+        "id": "collection_product_limit",
+        "label": "limit product",
+        "default":"4"
+      },
+      {
+        "type": "text",
+        "id": "collection_product_text",
+        "label": "Text deals",
+        
+        "default":"Deal ends in"
+      },
+      {
+        "type": "text",
+        "id": "collection_product_time",
+        "label": "time deals coundown",
+        "info": "Format: d/m/y",
+        "default":"12/12/2018"
+      }
+      
+    ],
+    
+    "presets": [
+      {
+        "name": "product deals v2",
+        "category": "Collection"
+        
+      }
+    ]
+  }
+{% endschema %}

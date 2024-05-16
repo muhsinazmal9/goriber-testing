@@ -1,0 +1,35 @@
+{% assign instafeed_img = '{{image}}' %}
+{% assign instafeed_link = '{{link}}' %}
+{% assign instafeed_like = '{{likes}}' %}
+{% assign instafeed_comment = '{{comments}}' %}
+
+{%if settings.section_ins_userid != blank and settings.section_ins_access_token != blank  %}
+<script>
+  jQuery(document).ready(function($) {
+
+    var feed = new Instafeed({
+      get: 'user',
+      userId: '{{settings.section_ins_userid}}',
+      accessToken: '{{settings.section_ins_access_token}}',
+      template: '<a href="{{instafeed_link}}"><img class="grow" src="{{instafeed_img}}" alt=""></a>',
+      target: 'instagram',
+      resolution: 'standard_resolution',
+      limit: '6',
+      sortBy:'{{settings.section_ins_sort}}'
+
+    });
+    feed.run();
+
+  }); 
+</script>
+{%endif%}
+
+{%if settings.section_ins_userid != blank and settings.section_ins_access_token != blank  %}
+<div class="list-instagram" id="instagram">
+
+</div>
+{%else%}
+<div class="list-instagram" id="instagram">
+  <a href="#"><img class="grow" src="{{'in1.png'|asset_url}}" alt=""></a>
+</div>
+{%endif%}

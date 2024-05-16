@@ -1,0 +1,121 @@
+
+
+<div data-section-id="{{ section.id }}" data-section-type="section-banner-v3" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="banner-v3">
+    <div class="container">
+
+      <div class="product-type">
+        <div class="row">
+          {%for block in section.blocks%}
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="box-product-type">
+              <h2 class="color2 title30 text-center title-box2">{{block.settings.collection_title}}</h2>
+              <div class="product-type-slider">
+                <div class="wrap-item group-navi" data-pagination="false" data-navigation="true" data-itemscustom="[[0,1],[560,2],[768,1]]">
+                  {%for product in collections[block.settings.collection_product].products limit:6 %}
+                  {%if forloop.index == 1 or forloop.index == 4 %}
+                  <div class="item">
+                    {%endif%}
+                    {%include 'product-item-v6'%}
+                   
+                    {%if forloop.index == 3 or forloop.last %}
+                  </div>
+                  {%endif%}
+                   {%else%}
+                    {%include 'product-item-v6-empty'%}
+                  {%endfor%}
+                  <!-- End Item -->
+
+                </div>
+              </div>
+              <div class="view-all-product text-center">
+                <a href="{{collections[block.settings.collection_product].url}}" class="btn-arrow color style2">{{block.settings.collection_button}}</a>
+              </div>
+            </div>
+          </div>
+          {%endfor%}
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Section product 3 column",
+  "class": "index-section",
+  "settings": [
+	 
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      }
+	  
+		
+	  
+      
+  ],
+    "blocks": [
+      
+	  {
+      "type": "collection",
+      "name": "Collection",
+      "limit": 3,
+      "settings": [
+    	
+        {
+          "type": "text",
+          "id": "collection_title",
+          "label": "Title",
+		  "default":"SPECIAL"
+        },
+        {
+          "type": "collection",
+          "id": "collection_product",
+          "label": "Select collection"
+        },
+        {
+          "type": "text",
+          "id": "collection_button",
+          "label": "Button",
+          "default":"view all"
+        }
+      ]
+      }
+	
+
+    ],
+
+ 
+  "presets": [{
+    "name": "collection 3 column ",
+    "category": "Collection",
+        "blocks": [
+                {
+                "type": "collection"
+                },
+                {
+                "type": "collection"
+                },
+                {
+                "type": "collection"
+                }
+            ]
+   
+  }]
+}
+{% endschema %}
